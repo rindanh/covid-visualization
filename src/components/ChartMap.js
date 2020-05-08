@@ -41,7 +41,7 @@ const options = {
 	displayMode: 'regions'
 };
 
-const dataTable = [
+const dataTable1 = [
 	['Province', 'Total Case'],
 	['ID-AC', 200],
 	['ID-BA', 300],
@@ -49,6 +49,16 @@ const dataTable = [
 	['ID-BT', 500],
 	['ID-BE', 600],
 	['ID-GO', 700],
+]
+
+const dataTable2 = [
+	['Province', 'Total Case'],
+	['ID-AC', 300],
+	['ID-BA', 500],
+	['ID-BB', 600],
+	['ID-BT', 600],
+	['ID-BE', 800],
+	['ID-GO', 900],
 ]
 
 class ChartMap extends React.Component {
@@ -64,7 +74,7 @@ class ChartMap extends React.Component {
 				width={'1000px'}
 				height={'600px'}
 				chartType="GeoChart"
-				data={ dataTable }
+				data={ dataTable1 }
 				options={options}
 				// Note: you will need to get a mapsApiKey for your project.
 				// See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
