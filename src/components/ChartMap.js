@@ -35,6 +35,7 @@ const chartEvents = [
 	}
 ];
 
+
 const options = {
 	region: 'ID',
 	resolution: 'provinces',
@@ -42,30 +43,23 @@ const options = {
 };
 
 
-class ChartMap extends React.Component {
-	constructor(props){
-		super(props)
-	}
+export default function ChartMap(props) {
 
-	render() {
-		console.log(this.props.data)
-		
-
-		return(
-			<Chart
-				width={'1000px'}
-				height={'600px'}
-				chartType="GeoChart"
-				data={ this.props.data }
-				options={options}
-				// Note: you will need to get a mapsApiKey for your project.
-				// See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-				mapsApiKey="AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY"
-				rootProps={{ 'data-testid': '1' }}
-				chartEvents={chartEvents}
-		    />
-		)
-	}
+	console.log(props.data)
+	
+	return(
+		<Chart
+			width={'1000px'}
+			height={'600px'}
+			chartType="GeoChart"
+			data={ props.data }
+			options={options}
+			chartWrapperParams={{ view: { columns: [0, 1] } }}
+			// Note: you will need to get a mapsApiKey for your project.
+			// See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+			mapsApiKey="AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY"
+			rootProps={{ 'data-testid': '1' }}
+			chartEvents={chartEvents}
+	    />
+	)
 }
-
-export default ChartMap;

@@ -8,10 +8,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "bootstrap": "^4.4.1",
     "json-loader": "^0.5.7",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-datetime-slider": "^0.0.8",
     "react-dom": "^16.13.1",
+    "react-dropdown": "^1.7.0",
     "react-google-charts": "^3.0.15",
     "react-moment": "^0.9.7",
     "react-scripts": "3.4.1"

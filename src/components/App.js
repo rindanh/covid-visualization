@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import ChartMap from "./ChartMap";
 import DateDiscreteSlider from './Slider'
-import DateSlider from './DateSlider'
-import SliderDate from './SliderDate'
+// import DateSlider from './DateSlider'
+import MapFilter from './MapFilter'
 import moment from 'moment';
 import dataJson from '../data/data.js'; 
 require('moment/locale/id');
@@ -19,7 +19,7 @@ const dataTable1 = [
 ]
 
 const dataTable2 = [
-	['Province', 'Total Case'],
+	['Province', 'Total Case','Province Name', 'Meninggal', 'Sembuh'],
 	['ID-AC', 300],
 	['ID-BA', 500],
 	['ID-BB', 600],
@@ -28,12 +28,6 @@ const dataTable2 = [
 	['ID-GO', 900]
 ]
 
-// const dataTable;
-
-// const ourdata = dataJson.data.map((d) => {
-
-// 	// return <p>{d.id}</p>;
-// })
 
 class App extends React.Component {
 
@@ -42,40 +36,40 @@ class App extends React.Component {
 		this.state = {
 			data: [],// [[['Province', 'Total Case']]],
 			latestDate: moment().valueOf(),
-			currentDate: moment().valueOf()
+			currentDate: moment().valueOf(),
+			filterValue: 'total'
 		}
 	}
 
 	getAllData() {
-		console.log("get all data called")
 		let arr = {}
 		let latestDate;
 		dataJson.data.map((d) => {
 			// console.log(d.id)
 			d.date = this.convertToDateValue(d.date)
 			let temp = []
-			temp.push(['Province', 'Total Case'])
+			temp.push(['Province', 'Total Case','Province Name', 'Meninggal', 'Sembuh'])
 
 			d.provinsi.map((p) => {
 				let prov = []
 				prov.push(p.kode)
 				prov.push(p.total)
+				prov.push(p.nama)
+				prov.push(p.meninggal)
+				prov.push(p.sembuh)
 				temp.push(prov)
 			})
 
 			arr[this.convertToDateValue(d.date)] = temp
 			latestDate = d.date
-			// arr.push(temp)
 		})
-		// console.log(arr[0])
-		// dataTable = arr[arr.length-1]
 
 		this.setState({
 			currentDate: this.convertToDateValue(latestDate),
 			latestDate: this.convertToDateValue(latestDate),
 			data: arr
 		})
-		// console.log(dataTable2)
+		console.log(arr)
 
 	}
 
@@ -83,26 +77,50 @@ class App extends React.Component {
 		return moment().valueOf()
 	}
 
-	handleChange = (newValue) => {
-		this.setState({
+	handleSliderChange = async (newValue) => {
+		await this.setState({
 			currentDate: newValue
 		})
-		console.log(this.state.currentDate)
-		// console.log(newValue)
-		// if (this.state.currentDate > moment("2020-04-01").valueOf()) {
-		// 	this.setState({
-		// 		data: dataTable2
-		// 	})
-		// } else {
-		// 	this.setState({
-		// 		data: dataTable1
-		// 	})
-		// }
 	};
+
+	handleMapFilterChange = async (val) => {
+		await this.setState({
+			filterValue: val
+		})
+	}
 
 	convertToDateValue(date) {
 		return moment(date).startOf('day').valueOf()
 	} 
+
+	convertToDateFormat(value) {
+		return moment(value).format("DD MMM YYYY")
+	}
+
+	setMapColumn() {
+		if (this.state.filterValue === 'total') {
+			return 1
+		} else
+		if (this.state.filterValue === 'meninggal') {
+			return 3
+		} else
+		if (this.state.filterValue === 'sembuh') {
+			return 4
+		}
+	}
+
+	getFilteredMapTable() {
+		let tab = []
+		let col = this.setMapColumn()
+
+		this.state.data[this.convertToDateValue(this.state.currentDate)].map((row) => {
+			let temp = []
+			temp.push(row[0])
+			temp.push(row[col])
+			tab.push(temp)
+		})
+		return tab;
+	}
 
 	componentWillMount() {
 		this.getAllData();
@@ -113,25 +131,27 @@ class App extends React.Component {
 		const latestDate = this.state.latestDate;
 		const first = this.convertToDateValue("2020-03-02")
 
-		console.log(this.state.currentDate)
-		console.log(this.state.data)
-
-		console.log(this.state.data[this.convertToDateValue(this.state.currentDate)])
+		const tab = this.getFilteredMapTable()
 
 		return (
 			<div className="App container">
 				<div className="row">
-					<ChartMap data={this.state.data[this.convertToDateValue(this.state.currentDate)]}/>
+					<MapFilter 
+						onChange={this.handleMapFilterChange.bind(this)}
+						initValue={this.state.filterValue}
+					/>
+					<ChartMap 
+						data={this.getFilteredMapTable()}
+					/>
 
 					<DateDiscreteSlider 
 						latest={latestDate} 
 						first={first}
 						current={this.state.currentDate}
-						onChange={this.handleChange.bind(this)}
+						onChange={this.handleSliderChange.bind(this)}
 					/>
-					{moment(this.state.currentDate).format("DD MMM YYYY")}
-					<DateSlider />
-					<SliderDate />
+
+					
 					
 			    </div>
 			</div>
