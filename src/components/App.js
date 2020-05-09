@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
 import ChartMap from "./ChartMap";
-import Slider from './Slider'
+import DateDiscreteSlider from './Slider'
 import DateSlider from './DateSlider'
-// import SliderDate from './SliderDate'
+import SliderDate from './SliderDate'
+import moment from 'moment';
 
 const dataTable1 = [
 	['Province', 'Total Case'],
@@ -30,39 +31,49 @@ class App extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			isEven:true,
-			data:dataTable2
+			data:dataTable2,
+			currentDate: this.getCurrentDate()
 		}
 	}
 
-	handleClick() {
-		if (this.state.isEven) {
+	getCurrentDate() {
+		return moment().valueOf()
+	}
+
+	handleChange = (newValue) => {
+		this.setState({
+			currentDate: newValue
+		})
+		if (this.state.currentDate > moment("2020-04-01").valueOf()) {
 			this.setState({
-				isEven: !this.state.isEven,
 				data: dataTable2
 			})
 		} else {
 			this.setState({
-				isEven: !this.state.isEven,
 				data: dataTable1
 			})
 		}
-	}
+	};
 
 
 	render() {
+		const now = moment().valueOf()
+		const first = moment("2020-03-02").valueOf()
+
 		return (
 			<div className="App container">
 				<div className="row">
-					<div className="col">
-						<ChartMap data={this.state.data}/>
+					<ChartMap data={this.state.data}/>
 
-						<Slider />
-						<DateSlider />
-					</div>
-					<div className="col">
-						<button onClick={() => this.handleClick()}>Click me!</button>
-					</div>
+					<DateDiscreteSlider 
+						now={now} 
+						first={first}
+						current={this.state.currentDate}
+						onChange={this.handleChange.bind(this)}
+					/>
+					<DateSlider />
+					<SliderDate />
+					
 			    </div>
 			</div>
 		);

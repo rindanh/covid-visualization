@@ -4,6 +4,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +45,7 @@ const DateSliderComponent = withStyles({
   },
   active: {},
   valueLabel: {
-    left: 'calc(-50% + 4px)',
+    // left: 'calc(-50% + 4px)',
   },
   track: {
     height: 3,
@@ -66,17 +67,37 @@ function DateThumbComponent(props) {
   );
 }
 
+function valuetext(value) {
+  return `Tanggal ${value}`;
+}
+
 export default function DateSlider() {
   const classes = useStyles();
+
+  const now = moment().valueOf()
+
+  const first = moment("2020-03-02").valueOf()
+
+  const [value, setValue] = React.useState([now,now]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <div className={classes.root}>
       <Typography gutterBottom>Date Slider 2</Typography>
       <DateSliderComponent
         ThumbComponent={DateThumbComponent}
-        getAriaLabel={(index) => (index === 0 ? 'Start Date' : 'End Date')}
-        defaultValue={[100, 100]}
+        getAriaValueText={valuetext}
+        min={first}
+        max={now}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
       />
     </div>
   );
 }
+
+/// defaultValue={[now, now]}
