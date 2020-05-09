@@ -4,22 +4,22 @@ import 'react-dropdown/style.css';
 
 const options = [
 	{
-		value: 'total',
+		value: 1,
 		label: 'Kasus total'
 	},
 	{
-		value: 'sembuh',
+		value: 2,
 		label: 'Kasus sembuh',
 	},
 	{
-		value: "meninggal",
+		value: 3,
 		label: 'Kasus meninggal'
 	}
 ]
 
 export default function MapFilter(props) {
 
-	const defaultOption = props.initValue //options[0]
+	const defaultOption = options[props.initValue-1]
 
 	const handleChange = (e) => {
 		props.onChange(e.value)

@@ -37,7 +37,7 @@ class App extends React.Component {
 			data: [],// [[['Province', 'Total Case']]],
 			latestDate: moment().valueOf(),
 			currentDate: moment().valueOf(),
-			filterValue: 'total'
+			filterValue: 1 //total
 		}
 	}
 
@@ -45,7 +45,6 @@ class App extends React.Component {
 		let arr = {}
 		let latestDate;
 		dataJson.data.map((d) => {
-			// console.log(d.id)
 			d.date = this.convertToDateValue(d.date)
 			let temp = []
 			temp.push(['Province', 'Total Case','Province Name', 'Meninggal', 'Sembuh'])
@@ -69,7 +68,6 @@ class App extends React.Component {
 			latestDate: this.convertToDateValue(latestDate),
 			data: arr
 		})
-		console.log(arr)
 
 	}
 
@@ -97,26 +95,25 @@ class App extends React.Component {
 		return moment(value).format("DD MMM YYYY")
 	}
 
-	setMapColumn() {
-		if (this.state.filterValue === 'total') {
-			return 1
-		} else
-		if (this.state.filterValue === 'meninggal') {
-			return 3
-		} else
-		if (this.state.filterValue === 'sembuh') {
-			return 4
-		}
-	}
+	// setMapColumn() {
+	// 	if (this.state.filterValue === 'total') {
+	// 		return 1
+	// 	} else
+	// 	if (this.state.filterValue === 'meninggal') {
+	// 		return 3
+	// 	} else
+	// 	if (this.state.filterValue === 'sembuh') {
+	// 		return 4
+	// 	}
+	// }
 
 	getFilteredMapTable() {
 		let tab = []
-		let col = this.setMapColumn()
 
 		this.state.data[this.convertToDateValue(this.state.currentDate)].map((row) => {
 			let temp = []
 			temp.push(row[0])
-			temp.push(row[col])
+			temp.push(row[this.state.filterValue])
 			tab.push(temp)
 		})
 		return tab;

@@ -44,8 +44,6 @@ const options = {
 
 
 export default function ChartMap(props) {
-
-	console.log(props.data)
 	
 	return(
 		<Chart
