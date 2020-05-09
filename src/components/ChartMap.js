@@ -48,6 +48,7 @@ class ChartMap extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.data)
 		
 
 		return(

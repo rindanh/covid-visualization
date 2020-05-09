@@ -18,7 +18,7 @@ function valuetext(value) {
 
 export default function DateDiscreteSlider(props) {
   const classes = useStyles();
-  const now = props.now
+  const latest = props.latest
   const first = props.first
   const current = props.current
   const step = 86400000 // selisih satu hari
@@ -30,8 +30,8 @@ export default function DateDiscreteSlider(props) {
       label: valuetext(first)
     },
     {
-      value: now,
-      label: valuetext(now)
+      value: latest,
+      label: valuetext(latest)
     }
   ]
 
@@ -48,7 +48,7 @@ export default function DateDiscreteSlider(props) {
         valueLabelDisplay="auto"
         step={step}
         min={first}
-        max={now}
+        max={latest}
         marks={marks}
       />
     </div>
