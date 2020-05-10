@@ -54,10 +54,11 @@ class App extends React.Component {
 			let temp = []
 			temp.push([
 				{type: 'string', label:'Code'}, // Province
-				{type: 'string', role:'tooltip', label:'Province'}, //'Province Name', 
-				{type: 'number', role:'tooltip', label:'Kasus Total'}, // 'Total Case', 
-				{type: 'number', role:'tooltip', label:'Meninggal'}, //'Meninggal', 
-				{type: 'number', role:'tooltip', label:'Sembuh'} // 'Sembuh'
+				{type: 'string', label:'Province'}, //'Province Name', 
+				{type: 'number', label:'Total'}, // 'Total Case', 
+				{type: 'number', label:'Meninggal'}, //'Meninggal', 
+				{type: 'number', label:'Sembuh'}, // 'Sembuh'
+				{type: 'string', role:'tooltip'}
 			])
 
 			d.provinsi.map((p) => {
@@ -67,6 +68,7 @@ class App extends React.Component {
 				prov.push(p.total)
 				prov.push(p.meninggal)
 				prov.push(p.sembuh)
+				prov.push(p.nama + '\n' + 'Terkonfirmasi: ' + p.total + '\n' + 'Sembuh: ' + p.sembuh + '\n' + 'Meninggal: ' + p.meninggal)
 				temp.push(prov)
 			})
 
@@ -234,7 +236,6 @@ class App extends React.Component {
 
 
 	render() {
-		console.log(this.state.isMap)
 		const latestDate = this.state.latestDate;
 		const first = this.convertToDateValue("2020-03-02")
 

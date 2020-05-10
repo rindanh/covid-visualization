@@ -5,15 +5,27 @@ import { Chart } from "react-google-charts";
 // import data from '../data/data.json';
 
 
-
-const options = {
-	region: 'ID',
-	resolution: 'provinces',
-	displayMode: 'regions'
-};
-
-
 export default function ChartMap(props) {
+
+	const color = () => {
+		if (props.col == 2) {
+			// total kasus
+			return 'blue'
+		} else
+		if (props.col == 3) {
+			// meninggal
+			return 'red'
+		} else {
+			return 'green'
+		}
+	}
+
+	const options = {
+		region: 'ID',
+		resolution: 'provinces',
+		displayMode: 'regions',
+		colorAxis: {colors: [color()]},
+	};
 
 	const chartEvents = [
 		{
@@ -49,14 +61,15 @@ export default function ChartMap(props) {
 
 	const getFilteredMapTable = () => {
 		let tab = []
-
+		console.log(props.data)
 		props.data.map((row) => {
 			let temp = []
 			temp.push(row[0])
-			temp.push(row[1])
 			temp.push(row[props.col])
+			temp.push(row[5])
 			tab.push(temp)
 		})
+		console.log(tab)
 		return tab;
 	}
 	
@@ -66,12 +79,13 @@ export default function ChartMap(props) {
 			chartType="GeoChart"
 			data={ getFilteredMapTable() }
 			options={options}
-			chartWrapperParams={{ view: { columns: [0, 2] } }}
+			chartWrapperParams={{ view: { columns: [0, 1, 2] } }}
 			// Note: you will need to get a mapsApiKey for your project.
 			// See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
 			mapsApiKey="AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY"
 			rootProps={{ 'data-testid': '1' }}
 			chartEvents={chartEvents}
+			chartPackages={['corechart', 'controls']}
 	    />
 	)
 }
