@@ -44,15 +44,28 @@ const options = {
 
 
 export default function ChartMap(props) {
+
+	const getFilteredMapTable = () => {
+		let tab = []
+
+		props.data.map((row) => {
+			let temp = []
+			temp.push(row[0])
+			temp.push(row[1])
+			temp.push(row[props.col])
+			tab.push(temp)
+		})
+		return tab;
+	}
 	
 	return(
 		<Chart
 			width={'1000px'}
 			height={'600px'}
 			chartType="GeoChart"
-			data={ props.data }
+			data={ getFilteredMapTable() }
 			options={options}
-			chartWrapperParams={{ view: { columns: [0, 1] } }}
+			chartWrapperParams={{ view: { columns: [0, 2] } }}
 			// Note: you will need to get a mapsApiKey for your project.
 			// See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
 			mapsApiKey="AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY"

@@ -37,7 +37,7 @@ class App extends React.Component {
 			data: [],// [[['Province', 'Total Case']]],
 			latestDate: moment().valueOf(),
 			currentDate: moment().valueOf(),
-			filterValue: 1 //total
+			filterValue: 2 //total:2, meninggal:3, sembuh:4
 		}
 	}
 
@@ -47,13 +47,19 @@ class App extends React.Component {
 		dataJson.data.map((d) => {
 			d.date = this.convertToDateValue(d.date)
 			let temp = []
-			temp.push(['Province', 'Total Case','Province Name', 'Meninggal', 'Sembuh'])
+			temp.push([
+				{type: 'string', role:'tooltip', label:'Code'}, // Province
+				{type: 'string', role:'tooltip', label:'Province'}, //'Province Name', 
+				{type: 'number', role:'tooltip', label:'Kasus Total'}, // 'Total Case', 
+				{type: 'number', role:'tooltip', label:'Meninggal'}, //'Meninggal', 
+				{type: 'number', role:'tooltip', label:'Sembuh'} // 'Sembuh'
+			])
 
 			d.provinsi.map((p) => {
 				let prov = []
 				prov.push(p.kode)
-				prov.push(p.total)
 				prov.push(p.nama)
+				prov.push(p.total)
 				prov.push(p.meninggal)
 				prov.push(p.sembuh)
 				temp.push(prov)
@@ -95,30 +101,6 @@ class App extends React.Component {
 		return moment(value).format("DD MMM YYYY")
 	}
 
-	// setMapColumn() {
-	// 	if (this.state.filterValue === 'total') {
-	// 		return 1
-	// 	} else
-	// 	if (this.state.filterValue === 'meninggal') {
-	// 		return 3
-	// 	} else
-	// 	if (this.state.filterValue === 'sembuh') {
-	// 		return 4
-	// 	}
-	// }
-
-	getFilteredMapTable() {
-		let tab = []
-
-		this.state.data[this.convertToDateValue(this.state.currentDate)].map((row) => {
-			let temp = []
-			temp.push(row[0])
-			temp.push(row[this.state.filterValue])
-			tab.push(temp)
-		})
-		return tab;
-	}
-
 	componentWillMount() {
 		this.getAllData();
 	}
@@ -128,8 +110,6 @@ class App extends React.Component {
 		const latestDate = this.state.latestDate;
 		const first = this.convertToDateValue("2020-03-02")
 
-		const tab = this.getFilteredMapTable()
-
 		return (
 			<div className="App container">
 				<div className="row">
@@ -138,7 +118,8 @@ class App extends React.Component {
 						initValue={this.state.filterValue}
 					/>
 					<ChartMap 
-						data={this.getFilteredMapTable()}
+						data={this.state.data[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
+						col={this.state.filterValue}
 					/>
 
 					<DateDiscreteSlider 

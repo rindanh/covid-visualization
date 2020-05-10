@@ -9,20 +9,20 @@ const options = [
 	},
 	{
 		value: 2,
-		label: 'Kasus sembuh',
+		label: 'Kasus meninggal',
 	},
 	{
 		value: 3,
-		label: 'Kasus meninggal'
+		label: 'Kasus sembuh'
 	}
 ]
 
 export default function MapFilter(props) {
 
-	const defaultOption = options[props.initValue-1]
+	const defaultOption = options[props.initValue-2]
 
 	const handleChange = (e) => {
-		props.onChange(e.value)
+		props.onChange(e.value+1)
 	}
 
 	return(
