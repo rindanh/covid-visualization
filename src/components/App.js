@@ -237,6 +237,7 @@ class App extends React.Component {
 					<div className="col">
 						<h2>Tren Kasus COVID-19 Indonesia</h2>
 						<h4>Untuk Kasus Terkonfirmasi</h4>
+						<p>Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia</p>
 						<br/>
 					</div>
 					<div className="col but">	
