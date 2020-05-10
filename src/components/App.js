@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
 import ChartMap from "./ChartMap";
+import LineChart from './LineChart';
 import DateDiscreteSlider from './Slider'
+import MultiselectCheckboxes from './MultiselectCheckboxes'
 // import DateSlider from './DateSlider'
 import MapFilter from './MapFilter'
 import moment from 'moment';
@@ -37,7 +39,8 @@ class App extends React.Component {
 			data: [],// [[['Province', 'Total Case']]],
 			latestDate: moment().valueOf(),
 			currentDate: moment().valueOf(),
-			filterValue: 2 //total:2, meninggal:3, sembuh:4
+			filterMapValue: 2, //total:2, meninggal:3, sembuh:4
+			filterProvinceCodes: [], // pake index 0
 		}
 	}
 
@@ -48,7 +51,7 @@ class App extends React.Component {
 			d.date = this.convertToDateValue(d.date)
 			let temp = []
 			temp.push([
-				{type: 'string', role:'tooltip', label:'Code'}, // Province
+				{type: 'string', label:'Code'}, // Province
 				{type: 'string', role:'tooltip', label:'Province'}, //'Province Name', 
 				{type: 'number', role:'tooltip', label:'Kasus Total'}, // 'Total Case', 
 				{type: 'number', role:'tooltip', label:'Meninggal'}, //'Meninggal', 
@@ -89,7 +92,20 @@ class App extends React.Component {
 
 	handleMapFilterChange = async (val) => {
 		await this.setState({
-			filterValue: val
+			filterMapValue: val
+		})
+	}
+
+	handleRegionClicked = async (code) => {
+		await this.setState({
+			filterProvinceCodes: [code]
+		})
+
+	}
+
+	handleLineCheckboxChange = async (selected) => {
+		await this.setState({
+			filterProvinceCodes: selected
 		})
 	}
 
@@ -115,11 +131,12 @@ class App extends React.Component {
 				<div className="row">
 					<MapFilter 
 						onChange={this.handleMapFilterChange.bind(this)}
-						initValue={this.state.filterValue}
+						initValue={this.state.filterMapValue}
 					/>
 					<ChartMap 
 						data={this.state.data[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
-						col={this.state.filterValue}
+						col={this.state.filterMapValue}
+						onClick={this.handleRegionClicked.bind(this)}
 					/>
 
 					<DateDiscreteSlider 
@@ -128,6 +145,24 @@ class App extends React.Component {
 						current={this.state.currentDate}
 						onChange={this.handleSliderChange.bind(this)}
 					/>
+				</div>
+				<div className='row'>
+					<div className="col">	
+						<MultiselectCheckboxes
+							data={this.state.data[this.convertToDateValue(this.state.currentDate)]}
+							opts={this.state.filterProvinceCodes}
+							handleChange={this.handleLineCheckboxChange.bind(this)}
+						/>
+					</div>
+					<div className="col">
+						<LineChart
+							cols={this.state.filterProvinceCodes}
+							data={this.state.data}
+							currentDate={this.state.currentDate}
+							latest={latestDate} 
+							first={first}
+						/>
+					</div>
 
 					
 					
@@ -140,3 +175,4 @@ class App extends React.Component {
 }
 
 export default App;
+
