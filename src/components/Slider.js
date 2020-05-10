@@ -41,6 +41,7 @@ export default function DateDiscreteSlider(props) {
       <Slider
         onChange={(event, newVal) => props.onChange(newVal)}
         value={current}
+        valueLabelFormat={valuetext}
         getAriaValueText={valuetext}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
