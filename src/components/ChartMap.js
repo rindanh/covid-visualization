@@ -7,16 +7,54 @@ import { Chart } from "react-google-charts";
 
 export default function ChartMap(props) {
 
-	const color = () => {
+	const color1 = () => {
 		if (props.col == 2) {
 			// total kasus
-			return 'blue'
+			return '#6a89cc'
 		} else
 		if (props.col == 3) {
 			// meninggal
-			return 'red'
+			return '#f8c291'
 		} else {
-			return 'green'
+		}
+	}
+	
+	const color2 = () => {
+		if (props.col == 2) {
+			// total kasus
+			return '#4a69bd'
+		} else
+		if (props.col == 3) {
+			// meninggal
+			return '#e55039'
+		} else {
+			return '#78e08f'
+		}
+	}
+	
+	const color3 = () => {
+		if (props.col == 2) {
+			// total kasus
+			return '#1e3799'
+		} else
+		if (props.col == 3) {
+			// meninggal
+			return '#eb2f06'
+		} else {
+			return '#38ada9'
+		}
+	}
+
+	const color4 = () => {
+		if (props.col == 2) {
+			// total kasus
+			return '#0c2461'
+		} else
+		if (props.col == 3) {
+			// meninggal
+			return '#b71540'
+		} else {
+			return '#079992'
 		}
 	}
 
@@ -24,7 +62,9 @@ export default function ChartMap(props) {
 		region: 'ID',
 		resolution: 'provinces',
 		displayMode: 'regions',
-		colorAxis: {colors: [color()]},
+		colorAxis: {colors: [color1(), color2(), color3(), color4()]},
+		backgroundColor: '#343A41',
+		datalessRegionColor: '#87929f',
 	};
 
 	const chartEvents = [

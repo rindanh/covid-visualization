@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import {Nav, Navbar, Button} from 'react-bootstrap';
 import './App.css';
 import ChartMap from "./ChartMap";
 import LineChart from './LineChart';
@@ -225,7 +225,7 @@ class App extends React.Component {
 							onClick={this.handleButtonClick.bind(this)}
 							className='float-right'
 						>
-						Lihat Tren Kasus >>
+						Lihat Tren Kasus
 						</Button>
 						<br/>
 					</div>
@@ -246,7 +246,7 @@ class App extends React.Component {
 							onClick={this.handleButtonClick.bind(this)}
 							className='float-right'
 						>
-						Lihat Peta Kasus >>
+						Lihat Peta Kasus
 						</Button>
 					</div>
 				</div>
@@ -260,23 +260,40 @@ class App extends React.Component {
 		const first = this.convertToDateValue("2020-03-02")
 
 		return (
-			<div className="App container">
-				<br/>
-				<h1>Persebaran COVID-19 di Indonesia</h1>
-				<br/>
-				<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga saat ini sudah terdapat 
-				xx kasus tersebut yang telah menyebar di xx provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
-				memperlambat laju penyebaran virus COVID-19</p><br/>
-				{this.handleText()}
-				{this.handleChartView(first, latestDate)}
+			<div style={{backgroundColor:"#343A41", color:"White", paddingBottom:50}}>
+				<Navbar bg="dark" variant="dark" fixed="top">
+					<Navbar.Brand>
+					<img
+						src="https://image.flaticon.com/icons/svg/2659/2659980.svg"
+						width="30"
+						height="30"
+						className="d-inline-block align-top"
+					/>{' '}
+					COVID-19
+					</Navbar.Brand>
+					<Nav defaultActiveKey="1" className="mr-auto">
+						<Nav.Link eventKey="1">Peta Kasus</Nav.Link>
+						<Nav.Link eventKey="2">Tren Kasus</Nav.Link>
+					</Nav>
+				</Navbar>
+				<div className="App container" style={{paddingTop:80}}>
+					<br/>
+					<h1>Persebaran COVID-19 di Indonesia</h1>
+					<br/>
+					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga saat ini sudah terdapat 
+					xx kasus tersebut yang telah menyebar di xx provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
+					memperlambat laju penyebaran virus COVID-19</p><br/>
+					{this.handleText()}
+					{this.handleChartView(first, latestDate)}
 
-				<br/>
-				<p className="petunjuk">
-				Oleh:<br/>
-				Azka Nabilah Mumtaz<br/>
-				Rinda Nur Hafizha<br/>
-				Yasya Rusyda Aslina<br/>
-				</p>
+					<br/>
+					<p className="petunjuk">
+					Oleh:<br/>
+					Azka Nabilah Mumtaz<br/>
+					Rinda Nur Hafizha<br/>
+					Yasya Rusyda Aslina<br/>
+					</p>
+				</div>
 			</div>
 		);
 	}
