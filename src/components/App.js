@@ -168,23 +168,24 @@ class App extends React.Component {
 			return(
 				<div>
 					<div className='row'>
-						<div className="col">
-							<MapFilter 
-								onChange={this.handleMapFilterChange.bind(this)}
-								initValue={this.state.filterMapValue}
-							/>
+						<div className="col-6">	
+							<h5>Tambah Provinsi</h5>
 							<MultiselectCheckboxes
 								data={this.state.data[this.convertToDateValue(this.state.currentDate)]}
 								opts={this.state.filterProvinceCodes}
 								handleChange={this.handleLineCheckboxChange.bind(this)}
 							/>
+						</div>
+						<div className="col-2">
+						</div>
+						<div className="col-4">
+							<MapFilter 
+								onChange={this.handleMapFilterChange.bind(this)}
+								initValue={this.state.filterMapValue}
+							/>
 							
 						</div>
-						<div className="col">	
-							
-						</div>
-						
-						
+					
 				    </div>
 				    <div className="row">
 				    	<LineChart
