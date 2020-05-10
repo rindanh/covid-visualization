@@ -153,6 +153,11 @@ class App extends React.Component {
 								current={this.state.currentDate}
 								onChange={this.handleSliderChange.bind(this)}
 							/>
+							<br/>
+							<br/>
+							<p className="petunjuk">
+							Keterangan: Provinsi Kalimantan Utara tidak tersedia pada peta ini karena tidak didukung oleh <i>platform</i>
+							</p>
 						</div>
 						<div className='col-4'>
 							<br/>
@@ -258,11 +263,19 @@ class App extends React.Component {
 				<br/>
 				<h1>Persebaran COVID-19 di Indonesia</h1>
 				<br/>
-				<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga saat ini sduah terdapat 
+				<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga saat ini sudah terdapat 
 				xx kasus tersebut yang telah menyebar di xx provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
 				memperlambat laju penyebaran virus COVID-19</p><br/>
 				{this.handleText()}
 				{this.handleChartView(first, latestDate)}
+
+				<br/>
+				<p className="petunjuk">
+				Oleh:<br/>
+				Azka Nabilah Mumtaz<br/>
+				Rinda Nur Hafizha<br/>
+				Yasya Rusyda Aslina<br/>
+				</p>
 			</div>
 		);
 	}
