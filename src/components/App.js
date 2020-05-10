@@ -162,7 +162,7 @@ class App extends React.Component {
 						<div className='col-4'>
 							<br/>
 							<br/>
-							<h4>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h4>
+							<h5>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h5>
 							<br/>
 							<MapFilter 
 								onChange={this.handleMapFilterChange.bind(this)}
@@ -216,7 +216,7 @@ class App extends React.Component {
 		if (this.state.isMap) {
 			return(
 				<div className="row">
-					<div className="col">
+					<div className="col-8">
 						<h2>Peta Kasus COVID-19 Indonesia</h2>
 					</div>
 					<div className="col but">
@@ -234,10 +234,10 @@ class App extends React.Component {
 		} else {
 			return(
 				<div className="row">
-					<div className="col">
+					<div className="col-8">
 						<h2>Tren Kasus COVID-19 Indonesia</h2>
 						<h4>Untuk Kasus Terkonfirmasi</h4>
-						<p>Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia</p>
+						<div className="petunjuk">Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia</div>
 						<br/>
 					</div>
 					<div className="col but">	
@@ -260,18 +260,22 @@ class App extends React.Component {
 		const first = this.convertToDateValue("2020-03-02")
 
 		return (
-			<div className="App container">
+			<div className="App-container">
+				{/* <div className = "title-container"> */}
+					<br/>
+					<br/>
+					<h1>Perkembangan Persebaran COVID-19 di Indonesia</h1>
+					<br/>
+					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga saat ini sudah terdapat 
+					1364 kasus yang telah menyebar di 34 provinsi. Persebaran COVID-19 sangat cepat. Kita sebagai masyarakat perlu memahami hal tersebut agar sadar bahwa kita perlu turut serta mencegah penyebaran terjadi di kemudian hari</p><br/>
+				{/* </div> */}
+				
+				<div className="body-container">
+					{this.handleText()}
+					{this.handleChartView(first, latestDate)}
+				</div>
 				<br/>
-				<h1>Persebaran COVID-19 di Indonesia</h1>
-				<br/>
-				<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga saat ini sudah terdapat 
-				xx kasus tersebut yang telah menyebar di xx provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
-				memperlambat laju penyebaran virus COVID-19</p><br/>
-				{this.handleText()}
-				{this.handleChartView(first, latestDate)}
-
-				<br/>
-				<p className="petunjuk">
+					<p className="petunjuk">
 				Oleh:<br/>
 				Azka Nabilah Mumtaz<br/>
 				Rinda Nur Hafizha<br/>
