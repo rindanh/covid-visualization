@@ -272,8 +272,8 @@ class App extends React.Component {
 					COVID-19
 					</Navbar.Brand>
 					<Nav defaultActiveKey="1" className="mr-auto">
-						<Nav.Link eventKey="1">Peta Kasus</Nav.Link>
-						<Nav.Link eventKey="2">Tren Kasus</Nav.Link>
+						<Nav.Link style={{fontSize:13}} eventKey="1">Peta Kasus</Nav.Link>
+						<Nav.Link style={{fontSize:13}} eventKey="2">Tren Kasus</Nav.Link>
 					</Nav>
 				</Navbar>
 				<div className="App container" style={{paddingTop:80}}>
