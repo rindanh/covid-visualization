@@ -117,7 +117,7 @@ class App extends React.Component {
 	} 
 
 	convertToDateFormat(value) {
-		return moment(value).format("DD MMM YYYY")
+		return moment(value).format("DD MMMM YYYY")
 	}
 
 	componentWillMount() {
@@ -136,12 +136,10 @@ class App extends React.Component {
 				<div>
 					<div className="row">
 						<div className="col">
-							<MapFilter 
-								onChange={this.handleMapFilterChange.bind(this)}
-								initValue={this.state.filterMapValue}
-							/>
+							
 							
 						</div>
+						
 						<div className="col">
 							<Button 
 								variant="secondary" 
@@ -149,21 +147,34 @@ class App extends React.Component {
 							>
 							Lihat Tren kasus
 							</Button>
+							<br/>
 						</div>
 					</div>
 					<div className="row">
-						<ChartMap 
-							data={this.state.data[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
-							col={this.state.filterMapValue}
-							onClick={this.handleRegionClicked.bind(this)}
-						/>
+						<div className="col-8">
 
-						<DateDiscreteSlider 
-							latest={latestDate} 
-							first={first}
-							current={this.state.currentDate}
-							onChange={this.handleSliderChange.bind(this)}
-						/>
+							<ChartMap 
+								data={this.state.data[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
+								col={this.state.filterMapValue}
+								onClick={this.handleRegionClicked.bind(this)}
+							/>
+							<DateDiscreteSlider 
+								latest={latestDate} 
+								first={first}
+								current={this.state.currentDate}
+								onChange={this.handleSliderChange.bind(this)}
+							/>
+						</div>
+						<div className='col-4'>
+							<br/>
+							<MapFilter 
+								onChange={this.handleMapFilterChange.bind(this)}
+								initValue={this.state.filterMapValue}
+							/>
+						</div>
+						
+
+						
 					</div>
 				</div>
 			)
@@ -171,13 +182,6 @@ class App extends React.Component {
 			return(
 				<div>
 					<div className='row'>
-						<div className="col">	
-							<MultiselectCheckboxes
-								data={this.state.data[this.convertToDateValue(this.state.currentDate)]}
-								opts={this.state.filterProvinceCodes}
-								handleChange={this.handleLineCheckboxChange.bind(this)}
-							/>
-						</div>
 						<div className="col">
 							<Button 
 								variant="secondary" 
@@ -186,6 +190,14 @@ class App extends React.Component {
 							Lihat Peta Kasus
 							</Button>
 						</div>
+						<div className="col">	
+							<MultiselectCheckboxes
+								data={this.state.data[this.convertToDateValue(this.state.currentDate)]}
+								opts={this.state.filterProvinceCodes}
+								handleChange={this.handleLineCheckboxChange.bind(this)}
+							/>
+						</div>
+						
 						
 				    </div>
 				    <div className="row">
@@ -202,6 +214,24 @@ class App extends React.Component {
 		}
 	}
 
+	handleText() {
+		if (this.state.isMap) {
+			return(
+				<div className="col">
+					<h2>Peta Kasus COVID-19 Indonesia</h2>
+					<h4>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h4>
+				</div>
+			)
+		} else {
+			return(
+				<div className="col">
+					<h2>Tren Kasus COVID-19 Indonesia</h2>
+					<h4>Untuk Kasus Terkonfirmasi</h4>
+				</div>
+			)
+		}
+	}
+
 
 	render() {
 		console.log(this.state.isMap)
@@ -210,6 +240,12 @@ class App extends React.Component {
 
 		return (
 			<div className="App container">
+				<h1>COVID-19 Indonesia</h1>
+				<div className="row">
+					{this.handleText()}
+					<div className="col">
+					</div>
+				</div>
 				{this.handleChartView(first, latestDate)}
 			</div>
 		);

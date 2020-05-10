@@ -27,7 +27,7 @@ export default function MapFilter(props) {
 
 	return(
 		<div>
-			Pilih kasus:
+			<h3 className="align-left">Pilih kasus:</h3>
 			<ReactDropdown options={options} onChange={handleChange} value={defaultOption} placeholder="Select an option" />
 		</div>
 	)

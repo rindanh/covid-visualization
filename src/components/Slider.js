@@ -7,7 +7,7 @@ require('moment/locale/id');
 
 const useStyles = makeStyles({
   root: {
-    width: 600,
+    width: 730,
   },
 });
 
@@ -38,7 +38,7 @@ export default function DateDiscreteSlider(props) {
   return (
     <div className={classes.root}>
       <Typography id="discrete-slider" gutterBottom>
-        Date Discrete Slider
+        Geser Untuk Mengatur Tanggal
       </Typography>
       <Slider
         onChange={(event, newVal) => props.onChange(newVal)}

@@ -19,6 +19,41 @@ export default function LineChart(props) {
 		return (date=>first && date<=current)
 	}
 
+	const options = {
+		// Use the same chart area width as the control for axis alignment.
+	    // chartArea: { height: '80%', width: '90%' },
+	    hAxis: { title: 'Tanggal'},
+	    vAxis: { 
+	    	viewWindow: { min: 0, max: 40 },
+	    	title: 'Jumlah Kasus',
+	    },
+	    // legend: { position: 'none' },
+	}
+
+	const controls = [
+	    {
+	      controlType: 'ChartRangeFilter',
+	      options: {
+	        filterColumnIndex: 0,
+	        ui: {
+	          chartType: 'LineChart',
+	          chartOptions: {
+	            chartArea: { width: '62%', height: '50%' },
+	            hAxis: { 
+	            	baselineColor: 'none',
+	            },
+	          },
+	        },
+	      },
+	      controlPosition: 'bottom',
+	      controlWrapperParams: {
+	        state: {
+	          range: { start: new Date(first), end: new Date(current) },
+	        },
+	      },
+	    },
+	]
+
 	const getFilteredLineTable = () => {
 		let tab = []
 
@@ -34,7 +69,7 @@ export default function LineChart(props) {
 		let i = first
 		while (i<=current) {
 			let temp = []
-			temp.push(convertToDateFormat(i))
+			temp.push(new Date(i))
 			props.cols.map((col) => {
 				temp.push(props.data[i][col+1][2]) //total kasus only
 			})
@@ -63,7 +98,11 @@ export default function LineChart(props) {
 		      1: { curveType: 'function' },
 		    },
 		  }}
+		  options={options}
+		  chartPackages={['corechart', 'controls']}
+		  controls={controls}
 		/>
 		
 	)
 }
+
