@@ -8,7 +8,7 @@ import MultiselectCheckboxes from './MultiselectCheckboxes'
 // import DateSlider from './DateSlider'
 import MapFilter from './MapFilter'
 import moment from 'moment';
-import dataJson from '../data/data.js'; 
+import dataJson from '../data/data.json'; 
 require('moment/locale/id');
 
 const dataTable1 = [
