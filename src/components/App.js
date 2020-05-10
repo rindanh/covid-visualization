@@ -138,7 +138,11 @@ class App extends React.Component {
 				<div>
 					<div className="row">
 						<div className="col-8">
-
+							<br/>
+							<div className='petunjuk'>
+								Arahkan kursor pada daerah di peta untuk mengetahui jumlah kasus daerah tersebut<br/>
+								Klik pada daerah di peta untuk diarahkan ke halaman tren kasus pada daerah tersebut
+							</div>
 							<ChartMap 
 								data={this.state.data[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
 								col={this.state.filterMapValue}
@@ -250,7 +254,7 @@ class App extends React.Component {
 
 		return (
 			<div className="App container">
-				<h1>COVID-19 Indonesia</h1>
+				<h1>Persebaran COVID-19 di Indonesia</h1>
 				{this.handleText()}
 				{this.handleChartView(first, latestDate)}
 			</div>
