@@ -3,11 +3,16 @@ h1 {
 }
 
 .but {
-  margin-top: 35px;
+  margin-top: 5px;
 }
 
 .petunjuk {
-  font-size: 14px
+  font-size: 13px
+}
+
+.text-caption {
+  margin-left: 150px;
+  margin-right: 150px
 }
 
 /*.App {

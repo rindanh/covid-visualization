@@ -138,10 +138,9 @@ class App extends React.Component {
 				<div>
 					<div className="row">
 						<div className="col-8">
-							<br/>
 							<div className='petunjuk'>
 								Arahkan kursor pada daerah di peta untuk mengetahui jumlah kasus daerah tersebut<br/>
-								Klik pada daerah di peta untuk diarahkan ke halaman tren kasus pada daerah tersebut
+								Klik pada daerah di peta untuk diarahkan ke grafik tren kasus pada daerah tersebut
 							</div>
 							<ChartMap 
 								data={this.state.data[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
@@ -156,6 +155,9 @@ class App extends React.Component {
 							/>
 						</div>
 						<div className='col-4'>
+							<br/>
+							<br/>
+							<h4>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h4>
 							<br/>
 							<MapFilter 
 								onChange={this.handleMapFilterChange.bind(this)}
@@ -211,7 +213,6 @@ class App extends React.Component {
 				<div className="row">
 					<div className="col">
 						<h2>Peta Kasus COVID-19 Indonesia</h2>
-						<h4>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h4>
 					</div>
 					<div className="col but">
 						<Button 
@@ -254,7 +255,12 @@ class App extends React.Component {
 
 		return (
 			<div className="App container">
+				<br/>
 				<h1>Persebaran COVID-19 di Indonesia</h1>
+				<br/>
+				<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga saat ini sduah terdapat 
+				xx kasus tersebut yang telah menyebar di xx provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
+				memperlambat laju penyebaran virus COVID-19</p><br/>
 				{this.handleText()}
 				{this.handleChartView(first, latestDate)}
 			</div>
@@ -265,44 +271,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-/// <div className="row">
-// 					<MapFilter 
-// 						onChange={this.handleMapFilterChange.bind(this)}
-// 						initValue={this.state.filterMapValue}
-// 					/>
-// 					<ChartMap 
-// 						data={this.state.data[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
-// 						col={this.state.filterMapValue}
-// 						onClick={this.handleRegionClicked.bind(this)}
-// 					/>
-
-// 					<DateDiscreteSlider 
-// 						latest={latestDate} 
-// 						first={first}
-// 						current={this.state.currentDate}
-// 						onChange={this.handleSliderChange.bind(this)}
-// 					/>
-// 				</div>
-// 				<div className='row'>
-// 					<div className="col">	
-// 						<MultiselectCheckboxes
-// 							data={this.state.data[this.convertToDateValue(this.state.currentDate)]}
-// 							opts={this.state.filterProvinceCodes}
-// 							handleChange={this.handleLineCheckboxChange.bind(this)}
-// 						/>
-// 					</div>
-// 					<div className="col">
-// 						<LineChart
-// 							cols={this.state.filterProvinceCodes}
-// 							data={this.state.data}
-// 							currentDate={this.state.currentDate}
-// 							latest={latestDate} 
-// 							first={first}
-// 						/>
-// 					</div>
-
-					
-					
-// 			    </div>

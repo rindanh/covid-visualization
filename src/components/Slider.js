@@ -37,9 +37,7 @@ export default function DateDiscreteSlider(props) {
 
   return (
     <div className={classes.root}>
-      <Typography id="discrete-slider" gutterBottom>
-        Geser Untuk Mengatur Tanggal
-      </Typography>
+      
       <Slider
         onChange={(event, newVal) => props.onChange(newVal)}
         value={current}
@@ -51,6 +49,9 @@ export default function DateDiscreteSlider(props) {
         max={latest}
         marks={marks}
       />
+      <Typography id="discrete-slider" gutterBottom>
+        Geser Untuk Mengatur Tanggal
+      </Typography>
     </div>
   );
 }
