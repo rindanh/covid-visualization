@@ -15,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 const DateSliderComponent = withStyles({
   root: {
     color: '#3a8589',
@@ -94,7 +92,7 @@ export default function DateSlider() {
         max={now}
         value={value}
         onChange={handleChange}
-        valueLabelDisplay="auto"
+        valueLabelDisplay="on"
       />
     </div>
   );

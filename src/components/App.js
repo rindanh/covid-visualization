@@ -162,7 +162,7 @@ class App extends React.Component {
 						<div className='col-4'>
 							<br/>
 							<br/>
-							<h4>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h4>
+							<h5>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h5>
 							<br/>
 							<MapFilter 
 								onChange={this.handleMapFilterChange.bind(this)}
@@ -216,7 +216,7 @@ class App extends React.Component {
 		if (this.state.isMap) {
 			return(
 				<div className="row">
-					<div className="col">
+					<div className="col-8">
 						<h2>Peta Kasus COVID-19 Indonesia</h2>
 					</div>
 					<div className="col but">
@@ -234,10 +234,10 @@ class App extends React.Component {
 		} else {
 			return(
 				<div className="row">
-					<div className="col">
+					<div className="col-8">
 						<h2>Tren Kasus COVID-19 Indonesia</h2>
 						<h4>Untuk Kasus Terkonfirmasi</h4>
-						<p>Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia</p>
+						<div className="petunjuk">Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia</div>
 						<br/>
 					</div>
 					<div className="col but">	

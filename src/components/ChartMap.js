@@ -115,7 +115,7 @@ export default function ChartMap(props) {
 	
 	return(
 		<Chart
-			width={'100%'}
+			width={'110%'}
 			chartType="GeoChart"
 			data={ getFilteredMapTable() }
 			options={options}
