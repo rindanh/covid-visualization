@@ -24,7 +24,7 @@ export default function LineChart(props) {
 	    // chartArea: { height: '80%', width: '90%' },
 	    hAxis: { title: 'Tanggal'},
 	    vAxis: { 
-	    	viewWindow: { min: 0, max: 40 },
+	    	viewWindow: { min: 0, max: 6000 },
 	    	title: 'Jumlah Kasus',
 	    },
 	    // legend: { position: 'none' },
