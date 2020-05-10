@@ -41,6 +41,7 @@ class App extends React.Component {
 			currentDate: moment().valueOf(),
 			filterMapValue: 2, //total:2, meninggal:3, sembuh:4
 			filterProvinceCodes: [], // pake index 0
+			isMap: true
 		}
 	}
 
@@ -98,7 +99,8 @@ class App extends React.Component {
 
 	handleRegionClicked = async (code) => {
 		await this.setState({
-			filterProvinceCodes: [code]
+			filterProvinceCodes: [code],
+			isMap: false
 		})
 
 	}
@@ -121,13 +123,9 @@ class App extends React.Component {
 		this.getAllData();
 	}
 
-
-	render() {
-		const latestDate = this.state.latestDate;
-		const first = this.convertToDateValue("2020-03-02")
-
-		return (
-			<div className="App container">
+	handleChartView(first, latestDate) {
+		if (this.state.isMap) {
+			return(
 				<div className="row">
 					<MapFilter 
 						onChange={this.handleMapFilterChange.bind(this)}
@@ -146,6 +144,9 @@ class App extends React.Component {
 						onChange={this.handleSliderChange.bind(this)}
 					/>
 				</div>
+			)
+		} else {
+			return(
 				<div className='row'>
 					<div className="col">	
 						<MultiselectCheckboxes
@@ -167,6 +168,18 @@ class App extends React.Component {
 					
 					
 			    </div>
+			)
+		}
+	}
+
+
+	render() {
+		const latestDate = this.state.latestDate;
+		const first = this.convertToDateValue("2020-03-02")
+
+		return (
+			<div className="App container">
+				{this.handleChartView(first, latestDate)}
 			</div>
 		);
 	}
@@ -176,3 +189,43 @@ class App extends React.Component {
 
 export default App;
 
+
+/// <div className="row">
+// 					<MapFilter 
+// 						onChange={this.handleMapFilterChange.bind(this)}
+// 						initValue={this.state.filterMapValue}
+// 					/>
+// 					<ChartMap 
+// 						data={this.state.data[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
+// 						col={this.state.filterMapValue}
+// 						onClick={this.handleRegionClicked.bind(this)}
+// 					/>
+
+// 					<DateDiscreteSlider 
+// 						latest={latestDate} 
+// 						first={first}
+// 						current={this.state.currentDate}
+// 						onChange={this.handleSliderChange.bind(this)}
+// 					/>
+// 				</div>
+// 				<div className='row'>
+// 					<div className="col">	
+// 						<MultiselectCheckboxes
+// 							data={this.state.data[this.convertToDateValue(this.state.currentDate)]}
+// 							opts={this.state.filterProvinceCodes}
+// 							handleChange={this.handleLineCheckboxChange.bind(this)}
+// 						/>
+// 					</div>
+// 					<div className="col">
+// 						<LineChart
+// 							cols={this.state.filterProvinceCodes}
+// 							data={this.state.data}
+// 							currentDate={this.state.currentDate}
+// 							latest={latestDate} 
+// 							first={first}
+// 						/>
+// 					</div>
+
+					
+					
+// 			    </div>

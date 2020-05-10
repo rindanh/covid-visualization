@@ -27,14 +27,9 @@ export default function LineChart(props) {
 		})
 
 
-		let header = ['date'].concat(head) //ini ganti colsnya diconvert jd kode provinsi
-
+		let header = ['date'].concat(head) 
 		tab.push(header)
 
-		console.log(props.data)
-		
-		
-		
 		
 		let i = first
 		while (i<=current) {
