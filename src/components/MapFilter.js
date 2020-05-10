@@ -5,15 +5,15 @@ import 'react-dropdown/style.css';
 const options = [
 	{
 		value: 1,
-		label: 'Kasus total'
+		label: 'Kasus Terkonfirmasi'
 	},
 	{
 		value: 2,
-		label: 'Kasus meninggal',
+		label: 'Kasus Meninggal',
 	},
 	{
 		value: 3,
-		label: 'Kasus sembuh'
+		label: 'Kasus Sembuh'
 	}
 ]
 
@@ -27,7 +27,7 @@ export default function MapFilter(props) {
 
 	return(
 		<div>
-			<h3 className="align-left">Pilih kasus:</h3>
+			<h5 className="align-left">Pilih kasus:</h5>
 			<ReactDropdown options={options} onChange={handleChange} value={defaultOption} placeholder="Select an option" />
 		</div>
 	)

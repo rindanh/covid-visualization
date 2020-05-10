@@ -137,22 +137,6 @@ class App extends React.Component {
 			return(
 				<div>
 					<div className="row">
-						<div className="col">
-							
-							
-						</div>
-						
-						<div className="col">
-							<Button 
-								variant="secondary" 
-								onClick={this.handleButtonClick.bind(this)}
-							>
-							Lihat Tren kasus
-							</Button>
-							<br/>
-						</div>
-					</div>
-					<div className="row">
 						<div className="col-8">
 
 							<ChartMap 
@@ -185,19 +169,19 @@ class App extends React.Component {
 				<div>
 					<div className='row'>
 						<div className="col">
-							<Button 
-								variant="secondary" 
-								onClick={this.handleButtonClick.bind(this)}
-							>
-							Lihat Peta Kasus
-							</Button>
-						</div>
-						<div className="col">	
+							<MapFilter 
+								onChange={this.handleMapFilterChange.bind(this)}
+								initValue={this.state.filterMapValue}
+							/>
 							<MultiselectCheckboxes
 								data={this.state.data[this.convertToDateValue(this.state.currentDate)]}
 								opts={this.state.filterProvinceCodes}
 								handleChange={this.handleLineCheckboxChange.bind(this)}
 							/>
+							
+						</div>
+						<div className="col">	
+							
 						</div>
 						
 						
@@ -219,16 +203,40 @@ class App extends React.Component {
 	handleText() {
 		if (this.state.isMap) {
 			return(
-				<div className="col">
-					<h2>Peta Kasus COVID-19 Indonesia</h2>
-					<h4>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h4>
+				<div className="row">
+					<div className="col">
+						<h2>Peta Kasus COVID-19 Indonesia</h2>
+						<h4>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h4>
+					</div>
+					<div className="col but">
+						<Button 
+							variant="primary" 
+							onClick={this.handleButtonClick.bind(this)}
+							className='float-right'
+						>
+						Lihat Tren Kasus >>
+						</Button>
+						<br/>
+					</div>
 				</div>
 			)
 		} else {
 			return(
-				<div className="col">
-					<h2>Tren Kasus COVID-19 Indonesia</h2>
-					<h4>Untuk Kasus Terkonfirmasi</h4>
+				<div className="row">
+					<div className="col">
+						<h2>Tren Kasus COVID-19 Indonesia</h2>
+						<h4>Untuk Kasus Terkonfirmasi</h4>
+						<br/>
+					</div>
+					<div className="col but">	
+						<Button 
+							variant="primary" 
+							onClick={this.handleButtonClick.bind(this)}
+							className='float-right'
+						>
+						Lihat Peta Kasus >>
+						</Button>
+					</div>
 				</div>
 			)
 		}
@@ -242,11 +250,7 @@ class App extends React.Component {
 		return (
 			<div className="App container">
 				<h1>COVID-19 Indonesia</h1>
-				<div className="row">
-					{this.handleText()}
-					<div className="col">
-					</div>
-				</div>
+				{this.handleText()}
 				{this.handleChartView(first, latestDate)}
 			</div>
 		);
