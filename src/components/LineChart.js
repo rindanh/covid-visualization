@@ -38,9 +38,10 @@ export default function LineChart(props) {
 	        ui: {
 	          chartType: 'LineChart',
 	          chartOptions: {
-	            chartArea: { width: '62%', height: '50%' },
+	            chartArea: { width: '62%', height: '30%' },
 	            hAxis: { 
 	            	baselineColor: 'none',
+	            	position: 'bottom'
 	            },
 	          },
 	        },
@@ -48,7 +49,7 @@ export default function LineChart(props) {
 	      controlPosition: 'bottom',
 	      controlWrapperParams: {
 	        state: {
-	          range: { start: new Date(first), end: new Date(current) },
+	          range: { start: new Date(first), end: new Date(latest) },
 	        },
 	      },
 	    },
@@ -87,17 +88,17 @@ export default function LineChart(props) {
 		  chartType="LineChart"
 		  loader={<div>Loading Chart</div>}
 		  data={getFilteredLineTable()}
-		  options={{
-		    hAxis: {
-		      title: 'Tanggal',
-		    },
-		    vAxis: {
-		      title: 'Jumlah Kasus',
-		    },
-		    series: {
-		      1: { curveType: 'function' },
-		    },
-		  }}
+		  // options={{
+		  //   hAxis: {
+		  //     title: 'Tanggal',
+		  //   },
+		  //   vAxis: {
+		  //     title: 'Jumlah Kasus',
+		  //   },
+		  //   series: {
+		  //     1: { curveType: 'function' },
+		  //   },
+		  // }}
 		  options={options}
 		  chartPackages={['corechart', 'controls']}
 		  controls={controls}
