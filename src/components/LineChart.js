@@ -104,11 +104,13 @@ class LineChart extends React.Component {
 	        },
 		    legend: { 
 		    	textStyle: {
-		            color: '#ffffff'
-		        },
-		    },
+					color: '#ffffff'
+				},
+				position: 'top',
+				alignment: 'end'
+			},
+			chartArea: { width: '80%', height: '70%' },
 		    lineWidth:4
-
 		}
 
 		const controls = [
@@ -120,7 +122,7 @@ class LineChart extends React.Component {
 		        ui: {
 		          chartType: 'LineChart',
 		          chartOptions: {
-		            chartArea: { width: '62%', height: '30%' },
+		            chartArea: { width: '70%', height: '60%' },
 		            hAxis: { 
 		            	title: 'Geser untuk melihat kasus dalam range tanggal tertentu',
 		            	baselineColor: 'none',

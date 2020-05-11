@@ -75,7 +75,8 @@ class LineChartMobile extends React.Component {
 		const options = {
 			// Use the same chart area width as the control for axis alignment.
 		    // chartArea: { height: '80%', width: '90%' },
-		    title: 'Tren Kasus ' + this.getKasus() + '\nTanggal ' + convertToDateFormat(this.props.first) + ' hingga ' + convertToDateFormat(this.props.latest),
+			title: 'Tren Kasus ' + this.getKasus() + '\nTanggal ' + convertToDateFormat(this.props.first) + ' hingga ' + convertToDateFormat(this.props.latest),
+			chartArea: { width: '90%', height: '70%' },
 		    titleTextStyle: {
 		    	color: '#ffffff',
 		    	fontSize: 20
@@ -108,9 +109,7 @@ class LineChartMobile extends React.Component {
 				},
 				position: 'bottom'
 			},
-			chartArea: { width: '90%', height: '70%' },
 		    lineWidth:4
-		    // legend: { position: 'none' },
 		}
 
 		const controls = [

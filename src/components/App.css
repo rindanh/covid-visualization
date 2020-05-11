@@ -103,6 +103,9 @@ body{
 }
 
 @media screen and (max-width: 678px) {
+  .Footer{
+    padding-bottom: 10px;
+  }
   .persuasive-text {
     margin-right: 5%;
     margin-left: 5%;
