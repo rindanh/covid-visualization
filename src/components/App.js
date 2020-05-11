@@ -3,6 +3,7 @@ import {Nav, Navbar, Button} from 'react-bootstrap';
 import './App.css';
 import ChartMap from "./ChartMap";
 import LineChart from './LineChart';
+import LineChartMobile from './LineChartMobile';
 import DateDiscreteSlider from './Slider'
 import MultiselectCheckboxes from './MultiselectCheckboxes'
 // import DateSlider from './DateSlider'
@@ -170,9 +171,17 @@ class App extends React.Component {
 
 	showLineChart() {
 		if (this.state.showIndo || this.state.filterProvinceCodes.length !== 0) {
-			console.log("cuy")
 			return this.drawLineChart()
-			console.log("end bos")
+		} else {
+			return (
+				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik tren kasus.</h4>
+			)
+		}
+	}
+
+	showLineChartMobile() {
+		if (this.state.showIndo || this.state.filterProvinceCodes.length !== 0) {
+			return this.drawLineChart()
 		} else {
 			return (
 				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik tren kasus.</h4>
@@ -193,7 +202,21 @@ class App extends React.Component {
 
 
 	drawLineChart() {
-		console.log("hei hambar")
+		return (
+			<LineChart
+				cols={this.state.filterProvinceCodes}
+				data={this.state.dataProvinces}
+				dataIndo={this.state.dataIndonesia}
+				currentDate={this.state.currentDate}
+				latest={this.state.latestDate} 
+				first={this.state.firstDate}
+				filterkasus={this.state.filterMapValue}
+				showIndo={this.state.showIndo}
+			/>
+		)
+	}
+
+	drawLineChartMobile() {
 		return (
 			<LineChart
 				cols={this.state.filterProvinceCodes}
@@ -212,8 +235,18 @@ class App extends React.Component {
 		if (this.state.isMap) {
 			return(
 				<div>
-					<div className="row">
-						<div className="col-8">
+					<div className="row container-fluid">
+						<div className='col-sm-4 map-filter-mobile'>
+							<br classname="br-mobile"/>
+							<br classname="br-mobile"/>
+							<h5>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h5>
+							<br/>
+							<MapFilter 
+								onChange={this.handleMapFilterChange.bind(this)}
+								initValue={this.state.filterMapValue}
+							/>
+						</div>
+						<div className="col-sm-8">
 							<div className='petunjuk-2'>
 								Arahkan kursor pada daerah di peta untuk mengetahui jumlah kasus daerah tersebut<br/>
 								Klik pada daerah di peta untuk diarahkan ke grafik tren kasus pada daerah tersebut
@@ -229,14 +262,14 @@ class App extends React.Component {
 								current={this.state.currentDate}
 								onChange={this.handleSliderChange.bind(this)}
 							/>
-							<br/>
-							<br/>
+							<br classname="br-mobile"/>
+							<br className="br-mobile"/>
 						</div>
-						<div className='col-4'>
-							<br/>
-							<br/>
+						<div className='col-sm-4 map-filter-web'>
+							<br classname="br-mobile"/>
+							<br classname="br-mobile"/>
 							<h5>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h5>
-							<br/>
+							<br classname="br-mobile"/>
 							<MapFilter 
 								onChange={this.handleMapFilterChange.bind(this)}
 								initValue={this.state.filterMapValue}
@@ -246,46 +279,82 @@ class App extends React.Component {
 				</div>
 			)
 		} else {
-			return(
-				<div>
-					<div className='row'>
-						<div className="col-6">	
-							<h5>Tambah Provinsi</h5>
-							{this.showMultiSelectCheckboxes()}
+			if (window.innerWidth > 678){
+				return(
+					<div>
+						<div className='row'>
+							<div className="col-6">	
+								<h5>Tambah Provinsi</h5>
+								<MultiselectCheckboxes
+									data={this.state.dataProvinces[this.convertToDateValue(this.state.currentDate)]}
+									opts={this.state.filterProvinceCodes}
+									handleChange={this.handleLineCheckboxChange.bind(this)}
+									showIndo={this.state.showIndo}
+								/>
+							</div>
+							<div className="col-2">
+							</div>
+							<div className="col-4 map-filter">
+								<MapFilter 
+									onChange={this.handleMapFilterChange.bind(this)}
+									initValue={this.state.filterMapValue}
+								/>
+								
+							</div>
+						
 						</div>
-						<div className="col-2">
+						<div className="row" style={{marginTop: 30, marginBottom: 200, width: '100%'}} media="screen and (min-width: 678px)">
+							{this.showLineChart()}
 						</div>
-						<div className="col-4">
-							<MapFilter 
-								onChange={this.handleMapFilterChange.bind(this)}
-								initValue={this.state.filterMapValue}
-							/>
-							
+					</div>
+				)
+			} else {
+				return(
+					<div>
+						<div className='row container-fluid'>
+							<div className="col-sm-6" style={{marginTop:-10, marginBottom: 15}}>	
+								<h6>Tambah Provinsi</h6>
+								<MultiselectCheckboxes
+									data={this.state.dataProvinces[this.convertToDateValue(this.state.currentDate)]}
+									opts={this.state.filterProvinceCodes}
+									handleChange={this.handleLineCheckboxChange.bind(this)}
+									showIndo={this.state.showIndo}
+								/>
+							</div>
+							<div className="col-sm-2">
+							</div>
+							<div className="col-sm-4 map-filter">
+								<MapFilter 
+									onChange={this.handleMapFilterChange.bind(this)}
+									initValue={this.state.filterMapValue}
+								/>
+								
+							</div>
+						
 						</div>
-					
-				    </div>
-				    <div className="row" style={{marginTop: 30, marginBottom: 200}}>
-				    	<div className="col">
-				    		{this.showLineChart()}
-				    	</div>
-				    </div>
-				</div>
-			)
+						<div className="row" style={{marginTop: 30, marginBottom: 200, width: '100%'}} media="screen and (min-width: 678px)">
+							<div className='col'>
+								{this.showLineChartMobile()}
+							</div>
+						</div>
+					</div>
+				)	
+			}
 		}
 	}
 
 	handleText() {
 		if (this.state.isMap) {
 			return(
-				<div className="row">
-					<div className="col-8" style={{paddingBottom: 10}}>
+				<div className="container-fluid row">
+					<div className="title-peta-kasus col-sm-8">
 						<h2>Peta Kasus COVID-19 Indonesia</h2>
 					</div>
-					<div className="col but">
+					<div className="col-sm-4 lihat-kasus-col">
 						<Button 
 							variant="secondary" 
 							onClick={this.handleButtonClick.bind(this)}
-							className='float-right'
+							className='lihat-kasus float-right'
 						>
 						Lihat Tren Kasus
 						</Button>
@@ -295,17 +364,17 @@ class App extends React.Component {
 			)
 		} else {
 			return(
-				<div className="row">
-					<div className="col-8">
+				<div className="container-fluid row">
+					<div className="title-peta-kasus col-sm-8">
 						<h2 style={{paddingBottom: 10}}>Tren Kasus COVID-19 Indonesia</h2>
 						<div className="petunjuk">Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia</div>
 						<br/>
 					</div>
-					<div className="col but">	
+					<div className="col-sm-4 lihat-peta-col">	
 						<Button 
 							variant="secondary" 
 							onClick={this.handleButtonClick.bind(this)}
-							className='float-right'
+							className='lihat-peta float-right'
 						>
 						Lihat Peta Kasus
 						</Button>
@@ -343,10 +412,11 @@ class App extends React.Component {
 				<div className="App container" style={{paddingTop:80}}>
 					<br/>
 					<h1>Persebaran COVID-19 di Indonesia</h1>
-					<br/>
-					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga hari ini ({this.convertToDateFormat(latestDate)}) sudah terdapat
-					&nbsp;{this.state.kasusTerkini['total']} kasus yang telah menyebar di 34 provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
-					memperlambat laju penyebaran virus COVID-19</p><br/>
+
+					<br class="br-mobile"/>
+					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga hari ini ({this.convertToDateFormat(latestDate)}) sudah terdapat 
+					&nbsp;{this.state.kasusTerkini['total']} kasus  yang telah menyebar di 34 provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
+					memperlambat laju penyebaran virus COVID-19</p><br class="br-mobile"/>
 					{this.handleText()}
 					{this.handleChartView(first, latestDate)}
 				</div>

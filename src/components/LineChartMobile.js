@@ -8,7 +8,7 @@ const convertToDateFormat = (value) => {
 }
 
 
-class LineChart extends React.Component {
+class LineChartMobile extends React.Component {
 
 	constructor(props) {
 		super(props)
@@ -108,7 +108,7 @@ class LineChart extends React.Component {
 		        },
 		    },
 		    lineWidth:4
-
+		    // legend: { position: 'none' },
 		}
 
 		const controls = [
@@ -120,7 +120,7 @@ class LineChart extends React.Component {
 		        ui: {
 		          chartType: 'LineChart',
 		          chartOptions: {
-		            title: 'Geser untuk melihat kasus dalam <i>range</i> tanggal tertentu',
+		          	title: 'Geser untuk melihat kasus dalam <i>range</i> tanggal tertentu',
 		            titleTextStyle: {
 		            	fontSize: 12,
 		            	color: '#ffffff',
@@ -165,7 +165,7 @@ class LineChart extends React.Component {
 		return(
 			<Chart
 			  width={'100%'}
-			  height={'600px'}
+			  height={'200px'}
 			  chartType="LineChart"
 			  loader={<div>Loading Chart</div>}
 			  data={this.getFilteredLineTable()}
@@ -189,4 +189,4 @@ class LineChart extends React.Component {
 	}
 }
 
-export default LineChart;
+export default LineChartMobile;
