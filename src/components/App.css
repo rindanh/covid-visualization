@@ -6,15 +6,86 @@ h1 {
   margin-top: 5px;
 }
 
+.css-2b097c-container{
+  color: #343A41 !important;
+}
+
 .petunjuk {
-  font-size: 13px
+  font-size: 13px;
+}
+
+.petunjuk-2 {
+  font-size: 11px;
+}
+
+.map-box {
+  background-color: aliceblue;
+}
+
+.Footer {
+  padding-top: 35px;
+  padding-bottom: 20px;
+  text-align: center;
+  font-size: 10px !important;
+  background-color: #343A41;
 }
 
 .text-caption {
-  margin-left: 150px;
-  margin-right: 150px
+  margin-left: 100px;
+  margin-right: 100px;
+  font-size: 16px;
 }
 
+.title-container {
+  border-radius: 20px;
+  background-color: lightskyblue;
+  margin: 50px;
+  margin-top: 200px;
+}
+.body-container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin: 50px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  border-style: dashed;
+  border-width: 1px;
+  border-color: lightsteelblue;
+}
+
+.App-container{
+  border-radius: 20px;
+  text-align: center;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding-top:50px;
+  padding-bottom: 50px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+html{
+  background-color:#343A41 !important;
+}
+
+body{
+  background-color: #343A41 !important;
+  font-size: 13px !important;
+}
+
+.dropdown-button{
+  padding-left: 0px;
+  padding-right: 100px;
+}
+
+.PrivateValueLabel-circle-25 {
+  width: 50px !important;
+  height: 50px !important;
+}
 /*.App {
   text-align: center;
 }
