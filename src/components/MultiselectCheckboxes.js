@@ -21,8 +21,6 @@ export default function MultiselectCheckboxes(props) {
 			s.push({label: 'ALL (INDONESIA)', value:'ID'})
 		}
 
-		console.log(s)
-
 		return s;
 		
 	}
@@ -32,8 +30,6 @@ export default function MultiselectCheckboxes(props) {
 		selected = selected.map((s) => {
 			return s.value
 		})
-		console.log(selected)
-
 		let isIndoSelected = false
 		selected = selected.filter((s) => {
 			if (s==='ID') {
@@ -41,7 +37,6 @@ export default function MultiselectCheckboxes(props) {
 			}
 			return (s !== 'ID')
 		})
-		console.log(selected)
 		props.handleChange(selected, isIndoSelected)
 	}
 	

@@ -18,13 +18,19 @@ class App extends React.Component {
 		this.state = {
 			dataProvinces: [],// [[['Province', 'Total Case']]],
 			dataIndonesia:[],
-			latestDate: moment().valueOf(),
-			currentDate: moment().valueOf(),
+			firstDate: this.convertToDateValue("2020-03-02"),
+			latestDate: moment().startOf('day').valueOf(),
+			currentDate: moment().startOf('day').valueOf(),
 			filterMapValue: 2, //total:2, meninggal:3, sembuh:4
 			filterProvinceCodes: [], // pake index 0
 			showIndo: true,
-			isMap: true
-			activeKey: 1
+			isMap: true,
+			activeKey: 1,
+			kasusTerkini: {
+				total: 0,
+				sembuh: 0,
+				meninggal: 0
+			}
 		}
 	}
 
@@ -69,14 +75,19 @@ class App extends React.Component {
 			latestDate = d.date
 		})
 
-		console.log(arrIndo)
-
 		this.setState({
-			currentDate: this.convertToDateValue(latestDate),
-			latestDate: this.convertToDateValue(latestDate),
+			currentDate: latestDate,
+			latestDate: latestDate,
 			dataProvinces: arr,
-			dataIndonesia: arrIndo
+			dataIndonesia: arrIndo,
+			kasusTerkini: {
+				total: arrIndo[latestDate][0],
+				sembuh: arrIndo[latestDate][1],
+				meninggal: arrIndo[latestDate][2]
+			}
 		})
+
+
 
 	}
 
@@ -102,11 +113,8 @@ class App extends React.Component {
 		await this.setState({
 			filterProvinceCodes: [code],
 			isMap: false,
-<<<<<<< HEAD
-			showIndo: false
-=======
+			showIndo: false,
 			activeKey: 2
->>>>>>> 9a1b3d41728993123a1849b4be2a69a329c90eb1
 		})
 
 	}
@@ -160,6 +168,46 @@ class App extends React.Component {
 		})
 	}
 
+	showLineChart() {
+		if (this.state.showIndo || this.state.filterProvinceCodes.length !== 0) {
+			console.log("cuy")
+			return this.drawLineChart()
+			console.log("end bos")
+		} else {
+			return (
+				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik tren kasus.</h4>
+			)
+		}
+	}
+
+	showMultiSelectCheckboxes() {
+		return (
+			<MultiselectCheckboxes
+				data={this.state.dataProvinces[this.convertToDateValue(this.state.currentDate)]}
+				opts={this.state.filterProvinceCodes}
+				handleChange={this.handleLineCheckboxChange.bind(this)}
+				showIndo={this.state.showIndo}
+			/>
+		)
+	}
+
+
+	drawLineChart() {
+		console.log("hei hambar")
+		return (
+			<LineChart
+				cols={this.state.filterProvinceCodes}
+				data={this.state.dataProvinces}
+				dataIndo={this.state.dataIndonesia}
+				currentDate={this.state.currentDate}
+				latest={this.state.latestDate} 
+				first={this.state.firstDate}
+				filterkasus={this.state.filterMapValue}
+				showIndo={this.state.showIndo}
+			/>
+		)
+	}
+
 	handleChartView(first, latestDate) {
 		if (this.state.isMap) {
 			return(
@@ -203,12 +251,7 @@ class App extends React.Component {
 					<div className='row'>
 						<div className="col-6">	
 							<h5>Tambah Provinsi</h5>
-							<MultiselectCheckboxes
-								data={this.state.dataProvinces[this.convertToDateValue(this.state.currentDate)]}
-								opts={this.state.filterProvinceCodes}
-								handleChange={this.handleLineCheckboxChange.bind(this)}
-								showIndo={this.state.showIndo}
-							/>
+							{this.showMultiSelectCheckboxes()}
 						</div>
 						<div className="col-2">
 						</div>
@@ -222,16 +265,9 @@ class App extends React.Component {
 					
 				    </div>
 				    <div className="row" style={{marginTop: 30, marginBottom: 200}}>
-				    	<LineChart
-							cols={this.state.filterProvinceCodes}
-							data={this.state.dataProvinces}
-							dataIndo={this.state.dataIndonesia}
-							currentDate={this.state.currentDate}
-							latest={latestDate} 
-							first={first}
-							filterkasus={this.state.filterMapValue}
-							showIndo={this.state.showIndo}
-						/>
+				    	<div className="col">
+				    		{this.showLineChart()}
+				    	</div>
 				    </div>
 				</div>
 			)
@@ -247,7 +283,7 @@ class App extends React.Component {
 					</div>
 					<div className="col but">
 						<Button 
-							variant="primary" 
+							variant="secondary" 
 							onClick={this.handleButtonClick.bind(this)}
 							className='float-right'
 						>
@@ -262,13 +298,12 @@ class App extends React.Component {
 				<div className="row">
 					<div className="col-8">
 						<h2 style={{paddingBottom: 10}}>Tren Kasus COVID-19 Indonesia</h2>
-						<h4>Untuk Kasus Terkonfirmasi</h4>
 						<div className="petunjuk">Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia</div>
 						<br/>
 					</div>
 					<div className="col but">	
 						<Button 
-							variant="primary" 
+							variant="secondary" 
 							onClick={this.handleButtonClick.bind(this)}
 							className='float-right'
 						>
@@ -281,9 +316,10 @@ class App extends React.Component {
 	}
 
 
+
 	render() {
 		const latestDate = this.state.latestDate;
-		const first = this.convertToDateValue("2020-03-02")
+		const first = this.state.firstDate
 
 		return (
 			<div style={{backgroundColor:"#343A41", color:"White"}}>
@@ -296,7 +332,7 @@ class App extends React.Component {
 						height="30"
 						className="d-inline-block align-top"
 					/>{' '}
-					COVID-19
+					COVID-19 Indonesia
 					</Navbar.Brand>
 					<Nav activeKey={this.state.activeKey} className="mr-auto">
 						<Nav.Link style={{fontSize:13}} onClick={this.handleMap} eventKey="1">Peta Kasus</Nav.Link>
@@ -308,8 +344,8 @@ class App extends React.Component {
 					<br/>
 					<h1>Persebaran COVID-19 di Indonesia</h1>
 					<br/>
-					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga saat ini sudah terdapat 
-					13.112 kasus tersebut yang telah menyebar di 34 provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
+					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga hari ini ({this.convertToDateFormat(latestDate)}) sudah terdapat
+					&nbsp;{this.state.kasusTerkini['total']} kasus yang telah menyebar di 34 provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
 					memperlambat laju penyebaran virus COVID-19</p><br/>
 					{this.handleText()}
 					{this.handleChartView(first, latestDate)}
