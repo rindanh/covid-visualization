@@ -78,8 +78,8 @@ body{
 }
 
 .dropdown-button{
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 0px;
+  padding-right: 100px;
 }
 
 .PrivateValueLabel-circle-25 {
