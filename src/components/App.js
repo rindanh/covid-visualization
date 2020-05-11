@@ -370,7 +370,7 @@ class App extends React.Component {
 				<div className="container-fluid row">
 					<div className="title-peta-kasus col-sm-8">
 						<h2 style={{paddingBottom: 10}}>Tren Kasus COVID-19 Indonesia</h2>
-						<div className="petunjuk">Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID-19 rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia
+						<div className="petunjuk">Dapat dilihat pada grafik di bawah ini bahwa jumlah kasus COVID-19 di Indonesia rata-rata memiliki kenaikan untuk setiap provinsi. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia
 						dan tugas kita bersama untuk mengurangi angka kenaikan jumlah kasus COVID-19.</div>
 						<br/>
 					</div>
