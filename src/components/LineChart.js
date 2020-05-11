@@ -8,103 +8,122 @@ const convertToDateFormat = (value) => {
 }
 
 
-export default function LineChart(props) {
+class LineChart extends React.Component {
 
-	const step = 86400000
-	const latest = props.latest
-	const first = props.first
-	const current = props.currentDate
-
-	const validateDateInRange = (date) => {
-		return (date=>first && date<=current)
+	constructor(props) {
+		super(props)
+		this.state = {
+			maxKasus: 6000
+		}
 	}
 
-	const options = {
-		// Use the same chart area width as the control for axis alignment.
-	    // chartArea: { height: '80%', width: '90%' },
-	    hAxis: { title: 'Tanggal'},
-	    vAxis: { 
-	    	viewWindow: { min: 0, max: 6000 },
-	    	title: 'Jumlah Kasus',
-	    },
-	    // legend: { position: 'none' },
-	}
-
-	const controls = [
-	    {
-	      controlType: 'ChartRangeFilter',
-	      options: {
-			backgroundColor: '#343A41',
-	        filterColumnIndex: 0,
-	        ui: {
-	          chartType: 'LineChart',
-	          chartOptions: {
-	            chartArea: { width: '62%', height: '30%' },
-	            hAxis: { 
-	            	baselineColor: 'none',
-	            	position: 'bottom'
-	            },
-	          },
-	        },
-	      },
-	      controlPosition: 'bottom',
-	      controlWrapperParams: {
-	        state: {
-	          range: { start: new Date(first), end: new Date(latest) },
-	        },
-	      },
-	    },
-	]
-
-	const getFilteredLineTable = () => {
+	getFilteredLineTable = () => {
+		console.log("berapa kali")
+		const step = 86400000
 		let tab = []
 
-		let head = props.cols.map((col) => {
-			return props.data[first][col+1][1]
+		let head = this.props.cols.map((col) => {
+			return this.props.data[this.props.first][col+1][1]
 		})
 
+		if (this.props.showIndo) {
+			head.push('ALL (INDONESIA)')
+		}
 
 		let header = ['date'].concat(head) 
 		tab.push(header)
 
-		
-		let i = first
-		while (i<=current) {
+		// handle indo and province
+		let i = this.props.first
+		// let max=this.state.maxKasus
+		while (i<=this.props.currentDate) {
 			let temp = []
 			temp.push(new Date(i))
-			props.cols.map((col) => {
-				temp.push(props.data[i][col+1][2]) //total kasus only
+
+			// insert province
+			this.props.cols.map((col) => {
+				temp.push(this.props.data[i][col+1][this.props.filterkasus])
 			})
+
+			// insert indo
+			if (this.props.showIndo) {
+				temp.push(this.props.dataIndo[i][this.props.filterkasus-2])	
+			}
+
 			tab.push(temp)
+
+
 			i+=step
 		}
-		// console.log(tab)
 		return tab;
 	}
 
-	return(
-		<Chart
-		  width={'100%'}
-		  height={'600px'}
-		  chartType="LineChart"
-		  loader={<div>Loading Chart</div>}
-		  data={getFilteredLineTable()}
-		  // options={{
-		  //   hAxis: {
-		  //     title: 'Tanggal',
-		  //   },
-		  //   vAxis: {
-		  //     title: 'Jumlah Kasus',
-		  //   },
-		  //   series: {
-		  //     1: { curveType: 'function' },
-		  //   },
-		  // }}
-		  options={options}
-		  chartPackages={['corechart', 'controls']}
-		  controls={controls}
-		/>
+
+	render() {
+
+		const options = {
+			// Use the same chart area width as the control for axis alignment.
+		    // chartArea: { height: '80%', width: '90%' },
+		    hAxis: { title: 'Tanggal'},
+		    vAxis: { 
+		    	viewWindow: { min: 0 },
+		    	title: 'Jumlah Kasus (orang)',
+		    },
+		    // legend: { position: 'none' },
+		}
+
+		const controls = [
+		    {
+		      controlType: 'ChartRangeFilter',
+		      options: {
+		        filterColumnIndex: 0,
+		        ui: {
+		          chartType: 'LineChart',
+		          chartOptions: {
+		            chartArea: { width: '62%', height: '30%' },
+		            hAxis: { 
+		            	baselineColor: 'none',
+		            	position: 'bottom'
+		            },
+		          },
+		        },
+		      },
+		      controlPosition: 'bottom',
+		      controlWrapperParams: {
+		        state: {
+		          range: { start: new Date(this.props.first), end: new Date(this.props.latest) },
+		        },
+		      },
+		    },
+		]
+
 		
-	)
+
+		return(
+			<Chart
+			  width={'100%'}
+			  height={'600px'}
+			  chartType="LineChart"
+			  loader={<div>Loading Chart</div>}
+			  data={this.getFilteredLineTable()}
+			  // options={{
+			  //   hAxis: {
+			  //     title: 'Tanggal',
+			  //   },
+			  //   vAxis: {
+			  //     title: 'Jumlah Kasus',
+			  //   },
+			  //   series: {
+			  //     1: { curveType: 'function' },
+			  //   },
+			  // }}
+			  options={options}
+			  chartPackages={['corechart', 'controls']}
+			  controls={controls}
+			/>
+			
+		)
+	}
 }
 
+export default LineChart;

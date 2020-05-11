@@ -12,7 +12,7 @@ export default function ChartMap(props) {
 			// total kasus
 			return '#6a89cc'
 		} else
-		if (props.col == 3) {
+		if (props.col === 3) {
 			// meninggal
 			return '#f8c291'
 		} else {
@@ -129,5 +129,3 @@ export default function ChartMap(props) {
 	    />
 	)
 }
-// width={'1000px'}
-// 			height={'600px'}
