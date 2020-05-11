@@ -180,7 +180,7 @@ class App extends React.Component {
 
 	showLineChartMobile() {
 		if (this.state.showIndo || this.state.filterProvinceCodes.length !== 0) {
-			return this.drawLineChart()
+			return this.drawLineChartMobile()
 		} else {
 			return (
 				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik tren akumulasi kasus.</h4>
@@ -218,6 +218,7 @@ class App extends React.Component {
 	drawLineChartMobile() {
 		return (
 			<LineChartMobile
+				height="100px"
 				cols={this.state.filterProvinceCodes}
 				data={this.state.dataProvinces}
 				dataIndo={this.state.dataIndonesia}
@@ -354,7 +355,7 @@ class App extends React.Component {
 					</div>
 					<div className="col-sm-4 lihat-kasus-col">
 						<Button 
-							variant="secondary" 
+							variant="primary" 
 							onClick={this.handleButtonClick.bind(this)}
 							className='lihat-kasus float-right'
 						>
@@ -369,13 +370,13 @@ class App extends React.Component {
 				<div className="container-fluid row">
 					<div className="title-peta-kasus col-sm-8">
 						<h2 style={{paddingBottom: 10}}>Tren Akumulasi Kasus COVID-19 Indonesia</h2>
-						<div className="petunjuk">Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID-19 rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia
+						<div className="petunjuk">Dapat dilihat pada grafik di bawah ini bahwa jumlah kasus COVID-19 di Indonesia rata-rata memiliki kenaikan untuk setiap provinsi. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia
 						dan tugas kita bersama untuk mengurangi angka kenaikan jumlah kasus COVID-19.</div>
 						<br/>
 					</div>
 					<div className="col-sm-4 lihat-peta-col">	
 						<Button 
-							variant="secondary" 
+							variant="primary" 
 							onClick={this.handleButtonClick.bind(this)}
 							className='lihat-peta float-right'
 						>
@@ -400,13 +401,12 @@ class App extends React.Component {
 		if (this.state.isMap) {
 			return(
 				<div>
-					<h6>Mari sama-sama <b>#BersatuLawanCOVID-19</b> dengan <b>#StayAtHome</b> dan <b>#PhysicalDistancing</b> agar daerah kita menjadi terang! {this.sunSymbol()}</h6>
-					
+					<h6 className="persuasive-text">Mari bersama-sama <b>#BersatuLawanCOVID-19</b> dengan <b><i>#StayAtHome</i></b> dan <b><i>#PhysicalDistancing</i></b> agar daerah kita menjadi terang! {this.sunSymbol()}</h6>					
 				</div>
 			) 
 		} else {
 			return(
-				<h6>Mari sama-sama <b>#BersatuLawanCOVID-19</b> dengan <b>#StayAtHome</b> dan <b>#PhysicalDistancing</b> untuk menurunkan tren kenaikan kasus pada grafik ini!</h6>
+				<h6 className="persuasive-text">Mari bersama-sama <b>#BersatuLawanCOVID-19</b> dengan <b><i>#StayAtHome</i></b> dan <b><i>#PhysicalDistancing</i></b> untuk menurunkan tren kenaikan kasus pada grafik di atas!</h6>
 			)
 		}
 	}
@@ -449,7 +449,7 @@ class App extends React.Component {
 					{this.handleChartView(first, latestDate)}
 				</div>
 				<div className="Footer">
-					<div className="persuasive-text">
+					<div>
 						{this.showPersuasiveText()}
 						<p>Sumber Data: <a href="https://covid19.go.id/">Badan Nasional Penanggulangan Bencana</a> dan <a href="https://infeksiemerging.kemkes.go.id/">Infeksi Emerging Kementerian Kesehatan RI</a></p>
 					</div>

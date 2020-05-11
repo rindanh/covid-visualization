@@ -75,9 +75,10 @@ class LineChartMobile extends React.Component {
 			// Use the same chart area width as the control for axis alignment.
 		    // chartArea: { height: '80%', width: '90%' },
 		    title: 'Tren Akumulasi Kasus ' + this.getKasus() + '\nTanggal ' + convertToDateFormat(this.props.first) + ' hingga ' + convertToDateFormat(this.props.latest),
+			chartArea: { width: '90%', height: '70%' },
 		    titleTextStyle: {
 		    	color: '#ffffff',
-		    	fontSize: 25
+		    	fontSize: 20
 		    },
 		    hAxis: { 
 		    	title: 'Tanggal',
@@ -103,11 +104,11 @@ class LineChartMobile extends React.Component {
 	        },
 		    legend: { 
 		    	textStyle: {
-		            color: '#ffffff'
-		        },
-		    },
+					color: '#ffffff'
+				},
+				position: 'bottom'
+			},
 		    lineWidth:4
-		    // legend: { position: 'none' },
 		}
 
 		const controls = [
@@ -119,22 +120,20 @@ class LineChartMobile extends React.Component {
 		        ui: {
 		          chartType: 'LineChart',
 		          chartOptions: {
-		          	title: 'Geser untuk melihat kasus dalam <i>range</i> tanggal tertentu',
-		            titleTextStyle: {
-		            	fontSize: 12,
-		            	color: '#ffffff',
-		            	position: 'bottom'
-		            },
-		            chartArea: { width: '62%', height: '30%' },
+					chartArea: { width: '80%', height: '70%' },
 		            hAxis: { 
+		            	title: 'Geser untuk melihat kasus dalam range tanggal tertentu',
 		            	baselineColor: 'none',
 		            	textPosition: 'out',
 		            	textStyle: {
 				            color: '#ffffff'
 				        },
-				        titleTextStyle: {
-				            color: '#ffffff'
-				        }
+						titleTextStyle: {
+							italic: false,
+							fontSize: 11,
+							color: '#ffffff',
+							position: 'bottom'
+						},
 		            },
 		            vAxis: {
 		            	textStyle: {
@@ -164,7 +163,7 @@ class LineChartMobile extends React.Component {
 		return(
 			<Chart
 			  width={'100%'}
-			  height={'200px'}
+			  height={'400px'}
 			  chartType="LineChart"
 			  loader={<div>Loading Chart</div>}
 			  data={this.getFilteredLineTable()}
