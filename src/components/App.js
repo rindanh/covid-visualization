@@ -121,7 +121,6 @@ class App extends React.Component {
 	}
 
 	handleLineCheckboxChange = async (selected, indo) => {
-		console.log(indo)
 		await this.setState({
 			filterProvinceCodes: selected,
 			showIndo: indo
