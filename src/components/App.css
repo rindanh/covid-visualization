@@ -19,7 +19,7 @@ h1 {
 }
 
 .Footer {
-  padding-top: 35px;
+  padding-top: 15px;
   padding-bottom: 20px;
   text-align: center;
   font-size: 10px !important;
@@ -97,7 +97,17 @@ body{
   display: block;
 }
 
+.persuasive-text {
+  margin-right: 27%;
+  margin-left: 27%;
+}
+
 @media screen and (max-width: 678px) {
+  .persuasive-text {
+    margin-right: 5%;
+    margin-left: 5%;
+    font-size: 12px !important;
+  }
   .map-filter-mobile {
     margin-top: -35px !important;
     display: block;
@@ -128,11 +138,11 @@ body{
     font-size: 11px !important;
   }
   .lihat-peta-col{
-    margin-top: -190px !important;
+    margin-top: -173px !important;
     z-index: 100;
   }
   .lihat-kasus-col{
-    margin-top: -30px !important;
+    margin-top: -20px !important;
     z-index: 100;
   }
   .title-peta-kasus{
@@ -144,6 +154,7 @@ body{
   .text-caption {
     margin-left: 0%;
     margin-right: 0%;
+    margin-bottom: 25px;
     font-size: 14px;
     text-align: center;
   }
@@ -171,11 +182,6 @@ body{
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
-}
-
-.persuasive-text {
-  margin-right: 400px;
-  margin-left: 400px
 }
 /*.App {
   text-align: center;

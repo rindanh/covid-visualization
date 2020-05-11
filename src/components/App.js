@@ -173,14 +173,14 @@ class App extends React.Component {
 			return this.drawLineChart()
 		} else {
 			return (
-				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik tren kasus.</h4>
+				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik kasus.</h4>
 			)
 		}
 	}
 
 	showLineChartMobile() {
 		if (this.state.showIndo || this.state.filterProvinceCodes.length !== 0) {
-			return this.drawLineChart()
+			return this.drawLineChartMobile()
 		} else {
 			return (
 				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik tren kasus.</h4>
@@ -217,7 +217,8 @@ class App extends React.Component {
 
 	drawLineChartMobile() {
 		return (
-			<LineChart
+			<LineChartMobile
+				height="100px"
 				cols={this.state.filterProvinceCodes}
 				data={this.state.dataProvinces}
 				dataIndo={this.state.dataIndonesia}
@@ -354,7 +355,7 @@ class App extends React.Component {
 					</div>
 					<div className="col-sm-4 lihat-kasus-col">
 						<Button 
-							variant="secondary" 
+							variant="primary" 
 							onClick={this.handleButtonClick.bind(this)}
 							className='lihat-kasus float-right'
 						>
@@ -375,7 +376,7 @@ class App extends React.Component {
 					</div>
 					<div className="col-sm-4 lihat-peta-col">	
 						<Button 
-							variant="secondary" 
+							variant="primary" 
 							onClick={this.handleButtonClick.bind(this)}
 							className='lihat-peta float-right'
 						>
@@ -400,13 +401,13 @@ class App extends React.Component {
 		if (this.state.isMap) {
 			return(
 				<div>
-					<h6>Ayo bersama-sama kita patuhi aturan PSBB untuk mendukung pemerintah dalam menurunkan angka kasus sehingga daerah kita menjadi terang! {this.sunSymbol()}</h6>
+					<h6 className="persuasive-text">Ayo bersama-sama kita patuhi aturan PSBB untuk mendukung pemerintah dalam menurunkan angka kasus sehingga daerah kita menjadi terang! {this.sunSymbol()}</h6>
 					
 				</div>
 			) 
 		} else {
 			return(
-				<h6>Ayo bersama-sama kita patuhi aturan PSBB untuk menurunkan tren kenaikan kasus pada grafik ini!</h6>
+				<h6 className="persuasive-text">Ayo bersama-sama kita patuhi aturan PSBB untuk menurunkan tren kenaikan kasus pada grafik ini!</h6>
 			)
 		}
 	}
@@ -448,7 +449,7 @@ class App extends React.Component {
 					{this.handleChartView(first, latestDate)}
 				</div>
 				<div className="Footer">
-					<div className="persuasive-text">
+					<div>
 						{this.showPersuasiveText()}
 					</div>
 					<br/>
