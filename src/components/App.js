@@ -401,13 +401,13 @@ class App extends React.Component {
 		if (this.state.isMap) {
 			return(
 				<div>
-					<h6 className="persuasive-text">Ayo bersama-sama kita patuhi aturan PSBB untuk mendukung pemerintah dalam menurunkan angka kasus sehingga daerah kita menjadi terang! {this.sunSymbol()} <i>#stayathome</i></h6>
+					<h6 className="persuasive-text">Mari bersama-sama #BersatuLawanCOVID-19 dengan <i>#StayAtHome</i> dan <i>#PhysicalDistancing</i> untuk mendukung pemerintah dalam menurunkan angka kasus sehingga daerah kita menjadi terang! {this.sunSymbol()}</h6>
 					
 				</div>
 			) 
 		} else {
 			return(
-				<h6 className="persuasive-text">Ayo bersama-sama kita patuhi aturan PSBB untuk menurunkan tren kenaikan kasus pada grafik ini! <i>#stayathome</i></h6>
+				<h6 className="persuasive-text">Mari bersama-sama #BersatuLawanCOVID-19 dengan <i>#StayAtHome</i> dan <i>#PhysicalDistancing</i> untuk menurunkan tren kenaikan kasus pada grafik di atas!</h6>
 			)
 		}
 	}
