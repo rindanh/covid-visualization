@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Chart } from "react-google-charts";
 import moment from 'moment';
 
@@ -75,7 +74,7 @@ class LineChart extends React.Component {
 		const options = {
 			// Use the same chart area width as the control for axis alignment.
 		    // chartArea: { height: '80%', width: '90%' },
-		    title: 'Tren Kasus ' + this.getKasus() + '\nTanggal ' + convertToDateFormat(this.props.first) + ' hingga ' + convertToDateFormat(this.props.latest),
+		    title: 'Tren Akumulasi Kasus ' + this.getKasus() + '\nTanggal ' + convertToDateFormat(this.props.first) + ' hingga ' + convertToDateFormat(this.props.latest),
 		    titleTextStyle: {
 		    	color: '#ffffff',
 		    	fontSize: 25

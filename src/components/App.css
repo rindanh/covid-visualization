@@ -171,12 +171,19 @@ body{
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
+
+  .persuasive-text {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
 }
 
 .persuasive-text {
   margin-right: 400px;
   margin-left: 400px
 }
+
+
 /*.App {
   text-align: center;
 }

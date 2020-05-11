@@ -143,7 +143,7 @@ class App extends React.Component {
 		await this.setState({
 			isMap: !this.state.isMap
 		})
-		if (this.state.isMap == true) {
+		if (this.state.isMap === true) {
 			this.setState({
 				activeKey: 1
 			})
@@ -173,7 +173,7 @@ class App extends React.Component {
 			return this.drawLineChart()
 		} else {
 			return (
-				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik tren kasus.</h4>
+				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik tren akumulasi kasus.</h4>
 			)
 		}
 	}
@@ -183,7 +183,7 @@ class App extends React.Component {
 			return this.drawLineChart()
 		} else {
 			return (
-				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik tren kasus.</h4>
+				<h4>Silahkan pilih provinsi terlebih dahulu untuk menampilkan grafik tren akumulasi kasus.</h4>
 			)
 		}
 	}
@@ -217,7 +217,7 @@ class App extends React.Component {
 
 	drawLineChartMobile() {
 		return (
-			<LineChart
+			<LineChartMobile
 				cols={this.state.filterProvinceCodes}
 				data={this.state.dataProvinces}
 				dataIndo={this.state.dataIndonesia}
@@ -236,8 +236,8 @@ class App extends React.Component {
 				<div>
 					<div className="row container-fluid">
 						<div className='col-sm-4 map-filter-mobile'>
-							<br classname="br-mobile"/>
-							<br classname="br-mobile"/>
+							<br className="br-mobile"/>
+							<br className="br-mobile"/>
 							<h5>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h5>
 							<br/>
 							<MapFilter 
@@ -247,8 +247,8 @@ class App extends React.Component {
 						</div>
 						<div className="col-sm-8">
 							<div className='petunjuk-2'>
-								Arahkan kursor pada daerah di peta untuk mengetahui jumlah kasus daerah tersebut<br/>
-								Klik pada daerah di peta untuk diarahkan ke grafik tren kasus pada daerah tersebut
+								Arahkan kursor pada daerah di peta untuk mengetahui jumlah akumulasi kasus daerah tersebut<br/>
+								Klik pada daerah di peta untuk diarahkan ke grafik tren akumulasi kasus pada daerah tersebut
 							</div>
 							<ChartMap 
 								data={this.state.dataProvinces[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
@@ -261,14 +261,14 @@ class App extends React.Component {
 								current={this.state.currentDate}
 								onChange={this.handleSliderChange.bind(this)}
 							/>
-							<br classname="br-mobile"/>
+							<br className="br-mobile"/>
 							<br className="br-mobile"/>
 						</div>
 						<div className='col-sm-4 map-filter-web'>
-							<br classname="br-mobile"/>
-							<br classname="br-mobile"/>
+							<br className="br-mobile"/>
+							<br className="br-mobile"/>
 							<h5>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h5>
-							<br classname="br-mobile"/>
+							<br className="br-mobile"/>
 							<MapFilter 
 								onChange={this.handleMapFilterChange.bind(this)}
 								initValue={this.state.filterMapValue}
@@ -349,7 +349,7 @@ class App extends React.Component {
 			return(
 				<div className="container-fluid row">
 					<div className="title-peta-kasus col-sm-8">
-						<h2>Peta Kasus COVID-19 Indonesia</h2>
+						<h2>Peta Akumulasi Kasus COVID-19 Indonesia</h2>
 						<p className="petunjuk">Kasus COVID-19 sudah dimiliki semua provinsi di Indonesia, dengan Provinsi DKI Jakarta serta Pulau Jawa sebagai pemilik kasus terbanyak.</p>
 					</div>
 					<div className="col-sm-4 lihat-kasus-col">
@@ -358,7 +358,7 @@ class App extends React.Component {
 							onClick={this.handleButtonClick.bind(this)}
 							className='lihat-kasus float-right'
 						>
-						Lihat Tren Kasus
+						Lihat Tren Akumulasi Kasus
 						</Button>
 						<br/>
 					</div>
@@ -368,7 +368,7 @@ class App extends React.Component {
 			return(
 				<div className="container-fluid row">
 					<div className="title-peta-kasus col-sm-8">
-						<h2 style={{paddingBottom: 10}}>Tren Kasus COVID-19 Indonesia</h2>
+						<h2 style={{paddingBottom: 10}}>Tren Akumulasi Kasus COVID-19 Indonesia</h2>
 						<div className="petunjuk">Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID-19 rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia
 						dan tugas kita bersama untuk mengurangi angka kenaikan jumlah kasus COVID-19.</div>
 						<br/>
@@ -379,7 +379,7 @@ class App extends React.Component {
 							onClick={this.handleButtonClick.bind(this)}
 							className='lihat-peta float-right'
 						>
-						Lihat Peta Kasus
+						Lihat Peta Akumulasi Kasus
 						</Button>
 					</div>
 				</div>
@@ -389,7 +389,7 @@ class App extends React.Component {
 
 	sunSymbol() {
 		return(
-			<svg class="bi bi-sun" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<svg className="bi bi-sun" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 			  <path d="M3.5 8a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0z"/>
 			  <path fill-rule="evenodd" d="M8.202.28a.25.25 0 00-.404 0l-.91 1.255a.25.25 0 01-.334.067L5.232.79a.25.25 0 00-.374.155l-.36 1.508a.25.25 0 01-.282.19l-1.532-.245a.25.25 0 00-.286.286l.244 1.532a.25.25 0 01-.189.282l-1.509.36a.25.25 0 00-.154.374l.812 1.322a.25.25 0 01-.067.333l-1.256.91a.25.25 0 000 .405l1.256.91a.25.25 0 01.067.334L.79 10.768a.25.25 0 00.154.374l1.51.36a.25.25 0 01.188.282l-.244 1.532a.25.25 0 00.286.286l1.532-.244a.25.25 0 01.282.189l.36 1.508a.25.25 0 00.374.155l1.322-.812a.25.25 0 01.333.067l.91 1.256a.25.25 0 00.405 0l.91-1.256a.25.25 0 01.334-.067l1.322.812a.25.25 0 00.374-.155l.36-1.508a.25.25 0 01.282-.19l1.532.245a.25.25 0 00.286-.286l-.244-1.532a.25.25 0 01.189-.282l1.508-.36a.25.25 0 00.155-.374l-.812-1.322a.25.25 0 01.067-.333l1.256-.91a.25.25 0 000-.405l-1.256-.91a.25.25 0 01-.067-.334l.812-1.322a.25.25 0 00-.155-.374l-1.508-.36a.25.25 0 01-.19-.282l.245-1.532a.25.25 0 00-.286-.286l-1.532.244a.25.25 0 01-.282-.189l-.36-1.508a.25.25 0 00-.374-.155l-1.322.812a.25.25 0 01-.333-.067L8.203.28zM8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11z" clip-rule="evenodd"/>
 			</svg>
@@ -400,13 +400,13 @@ class App extends React.Component {
 		if (this.state.isMap) {
 			return(
 				<div>
-					<h6>Ayo bersama-sama kita patuhi aturan PSBB untuk mendukung pemerintah dalam menurunkan angka kasus sehingga daerah kita menjadi terang! {this.sunSymbol()}</h6>
+					<h6>Mari sama-sama <b>#BersatuLawanCOVID-19</b> dengan <b>#StayAtHome</b> dan <b>#PhysicalDistancing</b> agar daerah kita menjadi terang! {this.sunSymbol()}</h6>
 					
 				</div>
 			) 
 		} else {
 			return(
-				<h6>Ayo bersama-sama kita patuhi aturan PSBB untuk menurunkan tren kenaikan kasus pada grafik ini!</h6>
+				<h6>Mari sama-sama <b>#BersatuLawanCOVID-19</b> dengan <b>#StayAtHome</b> dan <b>#PhysicalDistancing</b> untuk menurunkan tren kenaikan kasus pada grafik ini!</h6>
 			)
 		}
 	}
@@ -427,12 +427,13 @@ class App extends React.Component {
 						width="30"
 						height="30"
 						className="d-inline-block align-top"
+						alt="COVID19-symbol"
 					/>{' '}
 					COVID-19 Indonesia
 					</Navbar.Brand>
 					<Nav activeKey={this.state.activeKey} className="mr-auto">
-						<Nav.Link style={{fontSize:13}} onClick={this.handleMap} eventKey="1">Peta Kasus</Nav.Link>
-						<Nav.Link style={{fontSize:13}} onClick={this.handleChart} eventKey="2">Tren Kasus</Nav.Link>
+						<Nav.Link style={{fontSize:13}} onClick={this.handleMap} eventKey="1">Peta Akumulasi Kasus</Nav.Link>
+						<Nav.Link style={{fontSize:13}} onClick={this.handleChart} eventKey="2">Tren Akumulasi Kasus</Nav.Link>
 					</Nav>
 					</strong>
 				</Navbar>
@@ -440,19 +441,20 @@ class App extends React.Component {
 					<br/>
 					<h1>Persebaran COVID-19 di Indonesia</h1>
 
-					<br class="br-mobile"/>
-					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga hari ini ({this.convertToDateFormat(latestDate)}) sudah terdapat 
+					<br className="br-mobile"/>
+					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat yang terkonfirmasi pada tanggal 2 Maret 2020. Hingga hari ini ({this.convertToDateFormat(latestDate)}) sudah terdapat 
 					&nbsp;{this.state.kasusTerkini['total']} kasus  yang telah menyebar di 34 provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
-					memperlambat laju penyebaran virus COVID-19</p><br class="br-mobile"/>
+					memperlambat laju penyebaran virus COVID-19</p><br className="br-mobile"/>
 					{this.handleText()}
 					{this.handleChartView(first, latestDate)}
 				</div>
 				<div className="Footer">
 					<div className="persuasive-text">
 						{this.showPersuasiveText()}
+						<p>Sumber Data: <a href="https://covid19.go.id/">Badan Nasional Penanggulangan Bencana</a> dan <a href="https://infeksiemerging.kemkes.go.id/">Infeksi Emerging Kementerian Kesehatan RI</a></p>
 					</div>
 					<br/>
-					<img src="https://image.flaticon.com/icons/svg/2659/2659980.svg" width="65" height="65" style={{paddingBottom: 20}}></img>
+					<img src="https://image.flaticon.com/icons/svg/2659/2659980.svg" alt="COVID19-symbol" width="65" height="65" style={{paddingBottom: 20}}></img>
 					<p><b>
 						13516013 Azka Nabilah Mumtaz<br/>
 						13516091 Yasya Rusyda Aslina<br/>

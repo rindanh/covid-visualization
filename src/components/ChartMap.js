@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Chart } from "react-google-charts";
 
 // import data from '../data/data.json';
@@ -72,26 +71,7 @@ export default function ChartMap(props) {
 			eventName: "select",
 			callback({ chartWrapper }) {
 				var selection = chartWrapper.getChart().getSelection();
-				var message = '' , str = '';
-				var dataTable = chartWrapper.getDataTable()
-
-				for (var i = 0; i < selection.length; i++) {
-					var item = selection[i];
-					if (item.row != null && item.column != null) {
-						message += '{row:' + item.row + ',column:' + item.column + '}';
-						str = dataTable.getFormattedValue(item.row, item.column);
-					} else if (item.row != null) {
-						message += '{row:' + item.row + '}';
-						str = dataTable.getFormattedValue(item.row, 0);
-					} else if (item.column != null) {
-						message += '{column:' + item.column + '}';
-						str = dataTable.getFormattedValue(0, item.column);
-					}
-
-				}
-				if (message === '') {
-					message = 'nothing';
-				}
+				var item = selection[0]
 				props.onClick(item.row)
 			}
 		}
