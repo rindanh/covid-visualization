@@ -42,7 +42,8 @@ class App extends React.Component {
 			currentDate: moment().valueOf(),
 			filterMapValue: 2, //total:2, meninggal:3, sembuh:4
 			filterProvinceCodes: [], // pake index 0
-			isMap: true
+			isMap: true,
+			activeKey: 1
 		}
 	}
 
@@ -103,7 +104,8 @@ class App extends React.Component {
 	handleRegionClicked = async (code) => {
 		await this.setState({
 			filterProvinceCodes: [code],
-			isMap: false
+			isMap: false,
+			activeKey: 2
 		})
 
 	}
@@ -130,6 +132,29 @@ class App extends React.Component {
 		await this.setState({
 			isMap: !this.state.isMap
 		})
+		if (this.state.isMap == true) {
+			this.setState({
+				activeKey: 1
+			})
+		} else {
+			this.setState({
+				activeKey: 2
+			})
+		}
+	}
+
+	handleMap = async () => {
+		await this.setState({
+			isMap: true,
+			activeKey: 1
+		})
+	}
+
+	handleChart = async () => {
+		await this.setState({
+			isMap: false,
+			activeKey: 2
+		})
 	}
 
 	handleChartView(first, latestDate) {
@@ -138,7 +163,7 @@ class App extends React.Component {
 				<div>
 					<div className="row">
 						<div className="col-8">
-							<div className='petunjuk'>
+							<div className='petunjuk-2'>
 								Arahkan kursor pada daerah di peta untuk mengetahui jumlah kasus daerah tersebut<br/>
 								Klik pada daerah di peta untuk diarahkan ke grafik tren kasus pada daerah tersebut
 							</div>
@@ -155,9 +180,6 @@ class App extends React.Component {
 							/>
 							<br/>
 							<br/>
-							<p className="petunjuk">
-							Keterangan: Provinsi Kalimantan Utara tidak tersedia pada peta ini karena tidak didukung oleh <i>platform</i>
-							</p>
 						</div>
 						<div className='col-4'>
 							<br/>
@@ -168,10 +190,7 @@ class App extends React.Component {
 								onChange={this.handleMapFilterChange.bind(this)}
 								initValue={this.state.filterMapValue}
 							/>
-						</div>
-						
-
-						
+						</div>		
 					</div>
 				</div>
 			)
@@ -198,7 +217,7 @@ class App extends React.Component {
 						</div>
 					
 				    </div>
-				    <div className="row">
+				    <div className="row" style={{marginTop: 30, marginBottom: 200}}>
 				    	<LineChart
 							cols={this.state.filterProvinceCodes}
 							data={this.state.data}
@@ -216,7 +235,7 @@ class App extends React.Component {
 		if (this.state.isMap) {
 			return(
 				<div className="row">
-					<div className="col-8">
+					<div className="col-8" style={{paddingBottom: 10}}>
 						<h2>Peta Kasus COVID-19 Indonesia</h2>
 					</div>
 					<div className="col but">
@@ -235,7 +254,7 @@ class App extends React.Component {
 			return(
 				<div className="row">
 					<div className="col-8">
-						<h2>Tren Kasus COVID-19 Indonesia</h2>
+						<h2 style={{paddingBottom: 10}}>Tren Kasus COVID-19 Indonesia</h2>
 						<h4>Untuk Kasus Terkonfirmasi</h4>
 						<div className="petunjuk">Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia</div>
 						<br/>
@@ -260,8 +279,9 @@ class App extends React.Component {
 		const first = this.convertToDateValue("2020-03-02")
 
 		return (
-			<div style={{backgroundColor:"#343A41", color:"White", paddingBottom:50}}>
+			<div style={{backgroundColor:"#343A41", color:"White"}}>
 				<Navbar bg="dark" variant="dark" fixed="top">
+					<strong>
 					<Navbar.Brand>
 					<img
 						src="https://image.flaticon.com/icons/svg/2659/2659980.svg"
@@ -271,28 +291,29 @@ class App extends React.Component {
 					/>{' '}
 					COVID-19
 					</Navbar.Brand>
-					<Nav defaultActiveKey="1" className="mr-auto">
-						<Nav.Link style={{fontSize:13}} eventKey="1">Peta Kasus</Nav.Link>
-						<Nav.Link style={{fontSize:13}} eventKey="2">Tren Kasus</Nav.Link>
+					<Nav activeKey={this.state.activeKey} className="mr-auto">
+						<Nav.Link style={{fontSize:13}} onClick={this.handleMap} eventKey="1">Peta Kasus</Nav.Link>
+						<Nav.Link style={{fontSize:13}} onClick={this.handleChart} eventKey="2">Tren Kasus</Nav.Link>
 					</Nav>
+					</strong>
 				</Navbar>
 				<div className="App container" style={{paddingTop:80}}>
 					<br/>
 					<h1>Persebaran COVID-19 di Indonesia</h1>
 					<br/>
 					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat. Hingga saat ini sudah terdapat 
-					xx kasus tersebut yang telah menyebar di xx provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
+					13.112 kasus tersebut yang telah menyebar di 34 provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
 					memperlambat laju penyebaran virus COVID-19</p><br/>
 					{this.handleText()}
 					{this.handleChartView(first, latestDate)}
-
-					<br/>
-					<p className="petunjuk">
-					Oleh:<br/>
-					Azka Nabilah Mumtaz<br/>
-					Rinda Nur Hafizha<br/>
-					Yasya Rusyda Aslina<br/>
-					</p>
+				</div>
+				<div className="Footer">
+					<img src="https://image.flaticon.com/icons/svg/2659/2659980.svg" width="65" height="65" style={{paddingBottom: 20}}></img>
+					<p><b>
+						13516013 Azka Nabilah Mumtaz<br/>
+						13516091 Yasya Rusyda Aslina<br/>
+						13516151 Rinda Nur Hafizha<br/>
+					</b></p>
 				</div>
 			</div>
 		);

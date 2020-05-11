@@ -31,7 +31,7 @@ export default function MultiselectCheckboxes(props) {
 	
 	return(
 		<Select
-	        value={selected()}
+			value={selected()}
 	        onChange={handleChange}
 	        options={options}
 	        isMulti
