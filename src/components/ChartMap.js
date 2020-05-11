@@ -8,11 +8,11 @@ import { Chart } from "react-google-charts";
 export default function ChartMap(props) {
 
 	const color = () => {
-		if (props.col == 2) {
+		if (props.col === 2) {
 			// total kasus
 			return 'blue'
 		} else
-		if (props.col == 3) {
+		if (props.col === 3) {
 			// meninggal
 			return 'red'
 		} else {

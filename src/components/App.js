@@ -11,46 +11,38 @@ import moment from 'moment';
 import dataJson from '../data/data.json'; 
 require('moment/locale/id');
 
-const dataTable1 = [
-	['Province', 'Total Case'],
-	['ID-AC', 200],
-	['ID-BA', 300],
-	['ID-BB', 400],
-	['ID-BT', 500],
-	['ID-BE', 600],
-	['ID-GO', 700]
-]
-
-const dataTable2 = [
-	['Province', 'Total Case','Province Name', 'Meninggal', 'Sembuh'],
-	['ID-AC', 300],
-	['ID-BA', 500],
-	['ID-BB', 600],
-	['ID-BT', 600],
-	['ID-BE', 800],
-	['ID-GO', 900]
-]
-
-
 class App extends React.Component {
 
 	constructor(props){
 		super(props)
 		this.state = {
-			data: [],// [[['Province', 'Total Case']]],
+			dataProvinces: [],// [[['Province', 'Total Case']]],
+			dataIndonesia:[],
 			latestDate: moment().valueOf(),
 			currentDate: moment().valueOf(),
 			filterMapValue: 2, //total:2, meninggal:3, sembuh:4
 			filterProvinceCodes: [], // pake index 0
+			showIndo: true,
 			isMap: true
 		}
 	}
 
 	getAllData() {
 		let arr = {}
+		let arrIndo = {}
 		let latestDate;
 		dataJson.data.map((d) => {
 			d.date = this.convertToDateValue(d.date)
+
+			// handle indo
+
+			let tempIndo = []
+			tempIndo.push(d.total)
+			tempIndo.push(d.meninggal)
+			tempIndo.push(d.sembuh)
+			arrIndo[d.date] = tempIndo
+
+			// handle provinsi
 			let temp = []
 			temp.push([
 				{type: 'string', label:'Code'}, // Province
@@ -72,17 +64,22 @@ class App extends React.Component {
 				temp.push(prov)
 			})
 
-			arr[this.convertToDateValue(d.date)] = temp
+			arr[d.date] = temp
 			latestDate = d.date
 		})
+
+		console.log(arrIndo)
 
 		this.setState({
 			currentDate: this.convertToDateValue(latestDate),
 			latestDate: this.convertToDateValue(latestDate),
-			data: arr
+			dataProvinces: arr,
+			dataIndonesia: arrIndo
 		})
 
 	}
+
+	// combineData = () => {}
 
 	getCurrentDate() {
 		return moment().valueOf()
@@ -103,14 +100,17 @@ class App extends React.Component {
 	handleRegionClicked = async (code) => {
 		await this.setState({
 			filterProvinceCodes: [code],
-			isMap: false
+			isMap: false,
+			showIndo: false
 		})
 
 	}
 
-	handleLineCheckboxChange = async (selected) => {
+	handleLineCheckboxChange = async (selected, indo) => {
+		console.log(indo)
 		await this.setState({
-			filterProvinceCodes: selected
+			filterProvinceCodes: selected,
+			showIndo: indo
 		})
 	}
 
@@ -143,7 +143,7 @@ class App extends React.Component {
 								Klik pada daerah di peta untuk diarahkan ke grafik tren kasus pada daerah tersebut
 							</div>
 							<ChartMap 
-								data={this.state.data[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
+								data={this.state.dataProvinces[this.convertToDateValue(this.state.currentDate)]} // this.getFilteredMapTable()}
 								col={this.state.filterMapValue}
 								onClick={this.handleRegionClicked.bind(this)}
 							/>
@@ -182,9 +182,10 @@ class App extends React.Component {
 						<div className="col-6">	
 							<h5>Tambah Provinsi</h5>
 							<MultiselectCheckboxes
-								data={this.state.data[this.convertToDateValue(this.state.currentDate)]}
+								data={this.state.dataProvinces[this.convertToDateValue(this.state.currentDate)]}
 								opts={this.state.filterProvinceCodes}
 								handleChange={this.handleLineCheckboxChange.bind(this)}
+								showIndo={this.state.showIndo}
 							/>
 						</div>
 						<div className="col-2">
@@ -201,10 +202,13 @@ class App extends React.Component {
 				    <div className="row">
 				    	<LineChart
 							cols={this.state.filterProvinceCodes}
-							data={this.state.data}
+							data={this.state.dataProvinces}
+							dataIndo={this.state.dataIndonesia}
 							currentDate={this.state.currentDate}
 							latest={latestDate} 
 							first={first}
+							filterkasus={this.state.filterMapValue}
+							showIndo={this.state.showIndo}
 						/>
 				    </div>
 				</div>
