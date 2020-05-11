@@ -30,6 +30,7 @@ h1 {
   margin-left: 8%;
   margin-right: 8%;
   font-size: 16px;
+  text-align: center;
 }
 
 .title-container {
@@ -144,6 +145,7 @@ body{
     margin-left: 0%;
     margin-right: 0%;
     font-size: 14px;
+    text-align: center;
   }
   .dropdown-button{
     padding-left: 0px;
@@ -169,6 +171,11 @@ body{
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
+}
+
+.persuasive-text {
+  margin-right: 400px;
+  margin-left: 400px
 }
 /*.App {
   text-align: center;

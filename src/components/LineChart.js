@@ -120,21 +120,17 @@ class LineChart extends React.Component {
 		        ui: {
 		          chartType: 'LineChart',
 		          chartOptions: {
-		            title: 'Geser untuk melihat kasus dalam <i>range</i> tanggal tertentu',
-		            titleTextStyle: {
-		            	fontSize: 12,
-		            	color: '#ffffff',
-		            	position: 'bottom'
-		            },
 		            chartArea: { width: '62%', height: '30%' },
 		            hAxis: { 
+		            	title: 'Geser untuk melihat kasus dalam range tanggal tertentu',
 		            	baselineColor: 'none',
 		            	textPosition: 'out',
 		            	textStyle: {
 				            color: '#ffffff'
 				        },
 				        titleTextStyle: {
-				            color: '#ffffff'
+				            color: '#ffffff',
+				            italic: false
 				        }
 		            },
 		            vAxis: {

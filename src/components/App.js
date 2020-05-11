@@ -304,7 +304,9 @@ class App extends React.Component {
 						
 						</div>
 						<div className="row" style={{marginTop: 30, marginBottom: 200, width: '100%'}} media="screen and (min-width: 678px)">
-							{this.showLineChart()}
+							<div className="col">
+								{this.showLineChart()}
+							</div>
 						</div>
 					</div>
 				)
@@ -349,6 +351,7 @@ class App extends React.Component {
 				<div className="container-fluid row">
 					<div className="title-peta-kasus col-sm-8">
 						<h2>Peta Kasus COVID-19 Indonesia</h2>
+						<p className="petunjuk">Kasus COVID-19 sudah dimiliki semua provinsi di Indonesia, dengan Provinsi DKI Jakarta serta Pulau Jawa sebagai pemilik kasus terbanyak.</p>
 					</div>
 					<div className="col-sm-4 lihat-kasus-col">
 						<Button 
@@ -367,7 +370,8 @@ class App extends React.Component {
 				<div className="container-fluid row">
 					<div className="title-peta-kasus col-sm-8">
 						<h2 style={{paddingBottom: 10}}>Tren Kasus COVID-19 Indonesia</h2>
-						<div className="petunjuk">Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia</div>
+						<div className="petunjuk">Dapat dilihat pada bahwa setiap provinsi jumlah kasus COVID-19 rata-rata memiliki kenaikan. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia
+						dan tugas kita bersama untuk mengurangi angka kenaikan jumlah kasus COVID-19.</div>
 						<br/>
 					</div>
 					<div className="col-sm-4 lihat-peta-col">	
@@ -380,6 +384,30 @@ class App extends React.Component {
 						</Button>
 					</div>
 				</div>
+			)
+		}
+	}
+
+	sunSymbol() {
+		return(
+			<svg class="bi bi-sun" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			  <path d="M3.5 8a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0z"/>
+			  <path fill-rule="evenodd" d="M8.202.28a.25.25 0 00-.404 0l-.91 1.255a.25.25 0 01-.334.067L5.232.79a.25.25 0 00-.374.155l-.36 1.508a.25.25 0 01-.282.19l-1.532-.245a.25.25 0 00-.286.286l.244 1.532a.25.25 0 01-.189.282l-1.509.36a.25.25 0 00-.154.374l.812 1.322a.25.25 0 01-.067.333l-1.256.91a.25.25 0 000 .405l1.256.91a.25.25 0 01.067.334L.79 10.768a.25.25 0 00.154.374l1.51.36a.25.25 0 01.188.282l-.244 1.532a.25.25 0 00.286.286l1.532-.244a.25.25 0 01.282.189l.36 1.508a.25.25 0 00.374.155l1.322-.812a.25.25 0 01.333.067l.91 1.256a.25.25 0 00.405 0l.91-1.256a.25.25 0 01.334-.067l1.322.812a.25.25 0 00.374-.155l.36-1.508a.25.25 0 01.282-.19l1.532.245a.25.25 0 00.286-.286l-.244-1.532a.25.25 0 01.189-.282l1.508-.36a.25.25 0 00.155-.374l-.812-1.322a.25.25 0 01.067-.333l1.256-.91a.25.25 0 000-.405l-1.256-.91a.25.25 0 01-.067-.334l.812-1.322a.25.25 0 00-.155-.374l-1.508-.36a.25.25 0 01-.19-.282l.245-1.532a.25.25 0 00-.286-.286l-1.532.244a.25.25 0 01-.282-.189l-.36-1.508a.25.25 0 00-.374-.155l-1.322.812a.25.25 0 01-.333-.067L8.203.28zM8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11z" clip-rule="evenodd"/>
+			</svg>
+		)
+	}
+
+	showPersuasiveText() {
+		if (this.state.isMap) {
+			return(
+				<div>
+					<h6>Ayo bersama-sama kita patuhi aturan PSBB untuk mendukung pemerintah dalam menurunkan angka kasus sehingga daerah kita menjadi terang! {this.sunSymbol()}</h6>
+					
+				</div>
+			) 
+		} else {
+			return(
+				<h6>Ayo bersama-sama kita patuhi aturan PSBB untuk menurunkan tren kenaikan kasus pada grafik ini!</h6>
 			)
 		}
 	}
@@ -421,6 +449,10 @@ class App extends React.Component {
 					{this.handleChartView(first, latestDate)}
 				</div>
 				<div className="Footer">
+					<div className="persuasive-text">
+						{this.showPersuasiveText()}
+					</div>
+					<br/>
 					<img src="https://image.flaticon.com/icons/svg/2659/2659980.svg" width="65" height="65" style={{paddingBottom: 20}}></img>
 					<p><b>
 						13516013 Azka Nabilah Mumtaz<br/>
