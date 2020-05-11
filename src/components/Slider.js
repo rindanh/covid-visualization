@@ -63,7 +63,7 @@ const DateSlider = withStyles({
   },
   markLabel: {
     color: 'white',
-    fontSize: 12
+    fontSize: 13
   },
   markLabelActive: {
     color: 'white'
@@ -95,10 +95,10 @@ export default function DateDiscreteSlider(props) {
 
   return (
     <div className={classes.root}>
-      <Typography className={classes.alignRight} id="discrete-slider" style={{fontSize: 10}}>
+      <Typography className={classes.alignRight} id="discrete-slider" style={{fontSize: 11}}>
       Keterangan: Provinsi Kalimantan Utara tidak tersedia pada peta ini karena tidak didukung oleh <i>platform</i>
       </Typography>
-      <Typography id="discrete-slider" style={{fontSize: 10}}>
+      <Typography id="discrete-slider" style={{fontSize: 11}}>
         Geser Untuk Mengatur Tanggal
       </Typography>
       <DateSlider
