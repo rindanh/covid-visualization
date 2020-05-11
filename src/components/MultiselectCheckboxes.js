@@ -10,7 +10,7 @@ export default function MultiselectCheckboxes(props) {
 		}
 	})
 
-	const options = [{label: 'INDONESIA', value:'ID'}].concat(optionsProvince)
+	const options = [{label: 'ALL', value:'ID'}].concat(optionsProvince)
 
 	const selected = () => {
 		let s = props.opts.map((opt) => {
@@ -18,7 +18,7 @@ export default function MultiselectCheckboxes(props) {
 		})
 
 		if (props.showIndo) {
-			s.push({label: 'INDONESIA', value:'ID'})
+			s.push({label: 'ALL (INDONESIA)', value:'ID'})
 		}
 
 		console.log(s)

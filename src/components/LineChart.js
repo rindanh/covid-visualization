@@ -17,14 +17,6 @@ class LineChart extends React.Component {
 		}
 	}
 
-	getMax = (max, val) => {
-		if (val > max) {
-			return val
-		} else {
-			return max
-		}
-	}
-
 	getFilteredLineTable = () => {
 		console.log("berapa kali")
 		const step = 86400000
@@ -35,7 +27,7 @@ class LineChart extends React.Component {
 		})
 
 		if (this.props.showIndo) {
-			head.push('INDONESIA')
+			head.push('ALL (INDONESIA)')
 		}
 
 		let header = ['date'].concat(head) 
@@ -63,28 +55,9 @@ class LineChart extends React.Component {
 
 			i+=step
 		}
-
-		// this.setState({
-		// 	maxKasus: max
-		// })
-		// console.log(tab)
 		return tab;
 	}
 
-	getMaxKasus = async () => {
-		let tab = this.getFilteredLineTable()
-		let max = this.state.maxKasus
-		await tab.slice(1, tab.length).map((row) => {
-			row.slice(1, row.length).map((element) => {
-				max = this.getMax(max, element)
-			})
-		})
-		console.log(max)
-
-		await this.setState({
-			maxKasus: max
-		})
-	}
 
 	render() {
 
@@ -94,7 +67,7 @@ class LineChart extends React.Component {
 		    hAxis: { title: 'Tanggal'},
 		    vAxis: { 
 		    	viewWindow: { min: 0 },
-		    	title: 'Jumlah Kasus',
+		    	title: 'Jumlah Kasus (orang)',
 		    },
 		    // legend: { position: 'none' },
 		}
