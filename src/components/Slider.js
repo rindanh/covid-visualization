@@ -22,14 +22,14 @@ const useStyles = makeStyles((theme) => ({
 
 const DateSlider = withStyles({
   root: {
-    color: '#0c2461',
+    color: '#007BFF',
     height: 3,
     padding: '13px 0',
   },
   thumb: {
     height: 27,
     width: 27,
-    backgroundColor: '#6a89cc',
+    backgroundColor: '#007BFF',
     border: '1px solid currentColor',
     marginTop: -12,
     marginLeft: -13,
@@ -57,7 +57,7 @@ const DateSlider = withStyles({
     height: 3,
   },
   rail: {
-    color: '#6a89cc',
+    color: '#b1d6ff',
     opacity: 1,
     height: 3,
   },
