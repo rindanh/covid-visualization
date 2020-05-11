@@ -7,7 +7,12 @@ require('moment/locale/id');
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 730,
+    width: '100%',
+    '@media (max-width: 678px)' : {
+      marginLeft: '8%',
+      marginRight: '3%',
+      width: '85%'
+    }
   },
   slider: {
     padding: '22px 0px',
@@ -94,26 +99,28 @@ export default function DateDiscreteSlider(props) {
   ]
 
   return (
-    <div className={classes.root}>
-      <Typography className={classes.alignRight} id="discrete-slider" style={{fontSize: 11}}>
+    <div>
+      <Typography className={classes.alignRight} id="discrete-slider" style={{fontSize: 11, marginBottom: '5%'}}>
       Keterangan: Provinsi Kalimantan Utara tidak tersedia pada peta ini karena tidak didukung oleh <i>platform</i>
       </Typography>
       <Typography id="discrete-slider" style={{fontSize: 11}}>
         Geser Untuk Mengatur Tanggal
       </Typography>
-      <DateSlider
-        onChange={(event, newVal) => props.onChange(newVal)}
-        className={classes.alignCenter}
-        value={current}
-        valueLabelFormat={valuetext}
-        getAriaValueText={valuetext}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        step={step}
-        min={first}
-        max={latest}
-        marks={marks}
-      />
+      <div className={classes.root}>
+        <DateSlider
+          onChange={(event, newVal) => props.onChange(newVal)}
+          className={classes.alignCenter}
+          value={current}
+          valueLabelFormat={valuetext}
+          getAriaValueText={valuetext}
+          aria-labelledby="discrete-slider"
+          valueLabelDisplay="auto"
+          step={step}
+          min={first}
+          max={latest}
+          marks={marks}
+        />
+      </div>
     </div>
   );
 }

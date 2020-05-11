@@ -8,7 +8,7 @@ const convertToDateFormat = (value) => {
 }
 
 
-export default function LineChart(props) {
+export default function LineChartMobile(props) {
 
 	const step = 86400000
 	const latest = props.latest
@@ -85,7 +85,7 @@ export default function LineChart(props) {
 	return(
 		<Chart
 		  width={'100%'}
-		  height={'600px'}
+		  height={'200px'}
 		  chartType="LineChart"
 		  loader={<div>Loading Chart</div>}
 		  data={getFilteredLineTable()}

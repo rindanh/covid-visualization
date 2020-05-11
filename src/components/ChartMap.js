@@ -93,7 +93,7 @@ export default function ChartMap(props) {
 				if (message === '') {
 					message = 'nothing';
 				}
-				console.log('You selected ' + message + "\n" + str);
+				// console.log('You selected ' + message + "\n" + str);
 				props.onClick(item.row)
 			}
 		}
@@ -101,7 +101,7 @@ export default function ChartMap(props) {
 
 	const getFilteredMapTable = () => {
 		let tab = []
-		console.log(props.data)
+		// console.log(props.data)
 		props.data.map((row) => {
 			let temp = []
 			temp.push(row[0])
@@ -109,7 +109,7 @@ export default function ChartMap(props) {
 			temp.push(row[5])
 			tab.push(temp)
 		})
-		console.log(tab)
+		// console.log(tab)
 		return tab;
 	}
 	

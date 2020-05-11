@@ -13,7 +13,7 @@ export default function MultiselectCheckboxes(props) {
 	const selected = () => {
 		let s = []
 		props.opts.map((opt) => {
-			console.log(opt)
+			// console.log(opt)
 			s.push(options[opt])
 		})
 
