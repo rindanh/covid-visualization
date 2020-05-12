@@ -179,7 +179,7 @@ body{
     z-index: 100;
   }
   .lihat-kasus-col{
-    margin-top: -6% !important;
+    margin-top: -8% !important;
     z-index: 100;
   }
   .title-peta-kasus{
@@ -199,15 +199,15 @@ body{
     margin-left: 0px !important;
     margin-right: 0px !important;
   }
-  .col-sm-8{
+  .col-md-8{
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
-  .col-sm-4{
+  .col-md-4{
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
-  .col-sm-6{
+  .col-md-6{
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
@@ -219,7 +219,7 @@ body{
 
 @media screen and (max-width: 374px) {
   .lihat-kasus-col{
-    margin-top: -2% !important;
+    margin-top: -2%;
   }
 }
 
