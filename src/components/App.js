@@ -236,7 +236,7 @@ class App extends React.Component {
 			return(
 				<div>
 					<div className="row container-fluid">
-						<div className='col-sm-4 map-filter-mobile'>
+						<div className='col-md-4 map-filter-mobile'>
 							<br className="br-mobile"/>
 							<br className="br-mobile"/>
 							<h5>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h5>
@@ -246,7 +246,7 @@ class App extends React.Component {
 								initValue={this.state.filterMapValue}
 							/>
 						</div>
-						<div className="col-sm-8">
+						<div className="col-md-8">
 							<div className='petunjuk-2'>
 								Arahkan kursor pada daerah di peta untuk mengetahui jumlah akumulasi kasus daerah tersebut<br/>
 								Klik pada daerah di peta untuk diarahkan ke grafik tren akumulasi kasus pada daerah tersebut
@@ -265,7 +265,7 @@ class App extends React.Component {
 							<br className="br-mobile"/>
 							<br className="br-mobile"/>
 						</div>
-						<div className='col-sm-4 map-filter-web'>
+						<div className='col-md-4 map-filter-web'>
 							<br className="br-mobile"/>
 							<br className="br-mobile"/>
 							<h5>Tanggal: {this.convertToDateFormat(this.state.currentDate)}</h5>
@@ -282,7 +282,7 @@ class App extends React.Component {
 			if (window.innerWidth > 678){
 				return(
 					<div>
-						<div className='row'>
+						<div className='row container-fluid'>
 							<div className="col-6">	
 								<h5>Tambah Provinsi</h5>
 								<MultiselectCheckboxes
@@ -314,7 +314,7 @@ class App extends React.Component {
 				return(
 					<div>
 						<div className='row container-fluid'>
-							<div className="col-sm-6" style={{marginTop:-10, marginBottom: 15}}>	
+							<div className="col-md-6" style={{marginBottom: 15}}>	
 								<h6>Tambah Provinsi</h6>
 								<MultiselectCheckboxes
 									data={this.state.dataProvinces[this.convertToDateValue(this.state.currentDate)]}
@@ -323,9 +323,9 @@ class App extends React.Component {
 									showIndo={this.state.showIndo}
 								/>
 							</div>
-							<div className="col-sm-2">
+							<div className="col-md-2">
 							</div>
-							<div className="col-sm-4 map-filter">
+							<div className="col-md-4 map-filter">
 								<MapFilter 
 									onChange={this.handleMapFilterChange.bind(this)}
 									initValue={this.state.filterMapValue}
@@ -349,11 +349,11 @@ class App extends React.Component {
 		if (this.state.isMap) {
 			return(
 				<div className="container-fluid row">
-					<div className="title-peta-kasus col-sm-8">
+					<div className="title-peta-kasus col-md-8">
 						<h2>Peta Akumulasi Kasus COVID-19 Indonesia</h2>
 						<p className="petunjuk">Kasus COVID-19 sudah dimiliki semua provinsi di Indonesia, dengan Provinsi DKI Jakarta serta Pulau Jawa sebagai pemilik kasus terbanyak.</p>
 					</div>
-					<div className="col-sm-4 lihat-kasus-col">
+					<div className="col-md-4 lihat-kasus-col">
 						<Button 
 							variant="primary" 
 							onClick={this.handleButtonClick.bind(this)}
@@ -368,13 +368,13 @@ class App extends React.Component {
 		} else {
 			return(
 				<div className="container-fluid row">
-					<div className="title-peta-kasus col-sm-8">
-						<h2 style={{paddingBottom: 10}}>Tren Akumulasi Kasus COVID-19 Indonesia</h2>
+					<div className="title-peta-kasus col-md-8">
+						<h2>Tren Akumulasi Kasus COVID-19 Indonesia</h2>
 						<div className="petunjuk">Dapat dilihat pada grafik di bawah ini bahwa jumlah kasus COVID-19 di Indonesia rata-rata memiliki kenaikan untuk setiap provinsi. Setiap harinya, kasus semakin bertambah. Hal ini menjadi perhatian lebih untuk para pemerintah untuk menekan jumlah kasus COVID di Indonesia
 						dan tugas kita bersama untuk mengurangi angka kenaikan jumlah kasus COVID-19.</div>
 						<br/>
 					</div>
-					<div className="col-sm-4 lihat-peta-col">	
+					<div className="col-md-4 lihat-peta-col">	
 						<Button 
 							variant="primary" 
 							onClick={this.handleButtonClick.bind(this)}
@@ -451,7 +451,7 @@ class App extends React.Component {
 				<div className="Footer">
 					<div>
 						{this.showPersuasiveText()}
-						<p>Sumber Data: <a href="https://covid19.go.id/">Badan Nasional Penanggulangan Bencana</a> dan <a href="https://infeksiemerging.kemkes.go.id/">Infeksi Emerging Kementerian Kesehatan RI</a></p>
+						<p className="sumber">Sumber Data: <a href="https://covid19.go.id/">Badan Nasional Penanggulangan Bencana</a> dan <a href="https://infeksiemerging.kemkes.go.id/">Infeksi Emerging Kementerian Kesehatan RI</a></p>
 					</div>
 					<br/>
 					<img src="https://image.flaticon.com/icons/svg/2659/2659980.svg" alt="COVID19-symbol" width="65" height="65" style={{paddingBottom: 20}}></img>
