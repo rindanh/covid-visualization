@@ -442,8 +442,7 @@ class App extends React.Component {
 					<h1>Persebaran COVID-19 di Indonesia</h1>
 
 					<br className="br-mobile"/>
-					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat yang terkonfirmasi pada tanggal 2 Maret 2020. Hingga hari ini ({this.convertToDateFormat(latestDate)}) sudah terdapat 
-					&nbsp;{this.state.kasusTerkini['total']} kasus  yang telah menyebar di 34 provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
+					<p className="text-caption">Kasus COVID-19 di Indonesia diawali dari temuan 2 kasus di Depok, Jawa Barat yang terkonfirmasi pada tanggal 2 Maret 2020. Hingga hari ini ({this.convertToDateFormat(latestDate)}) sudah terdapat {Number(this.state.kasusTerkini['total']).toLocaleString("id-ID")} kasus  yang telah menyebar di 34 provinsi. Oleh karena itu, pemerintah telah memberlakukan PSBB untuk 
 					memperlambat laju penyebaran virus COVID-19</p><br className="br-mobile"/>
 					{this.handleText()}
 					{this.handleChartView(first, latestDate)}
