@@ -106,6 +106,10 @@ body{
   margin-top: 20px;
 }
 
+.lihat-peta{
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 1100px) {
   .dropdown-button{
     padding-left: 0px;
